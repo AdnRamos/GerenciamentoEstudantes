@@ -1,6 +1,10 @@
 package br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica;
 
 import br.edu.ufape.poo.gerenciamentoestudantes.dados.InterfaceColecaoEstudante;
+import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Enum.DiaSemana;
+import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Enum.ModalidadeAtividade;
+import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Enum.TipoFuncao;
+import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Enum.TipoVinculo;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,6 +20,10 @@ public class InterfaceColecaoEstudanteTeste {
     private InterfaceColecaoEstudante ColecaoEstudante;
     private ArrayList<Horario> horarios;
     private ArrayList<RegistroAtividade> registros;
+    private List<Vinculo> vinculos;
+    private List<Funcao> funcoes;
+    private List<Participacao> participacoes;
+    private List<Projeto> projetos;
 
     @Test
     void cadastrarEstudanteTest(){
@@ -43,6 +51,26 @@ public class InterfaceColecaoEstudanteTeste {
         e.setRegistros(registros);
         //Adicionando o registro
         e.addRegistro(reg);
+        //Integracao com vinculo
+        vinculos = new ArrayList<>(5);
+        e.setVinculos(vinculos);
+        Vinculo vinc = new Vinculo(TipoVinculo.VOLUNTARIO,"10:00", "20/15/2021");
+        e.addVinculo(vinc);
+        //Integracao com funcao
+        funcoes = new ArrayList<>(5);
+        e.setFuncoes(funcoes);
+        Funcao func = new Funcao(TipoFuncao.SCRUM_MASTER,"12/08/2000");
+        e.addFuncao(func);
+        //Integracao participacao
+        projetos = new ArrayList<>(5);
+        Projeto projeto = new Projeto("ten","que matar um","15/02/2022","java", "agro","clienteServidor");
+        participacoes = new ArrayList<>(5);
+        e.setParticipacoes(participacoes);
+        Participacao part = new Participacao("12/02/2022");
+        part.setEstudante(e);
+        part.setProjeto(projeto);
+        e.addParticipacao(part);
+
 
         //salvando na colecao
         ColecaoEstudante.save(e);

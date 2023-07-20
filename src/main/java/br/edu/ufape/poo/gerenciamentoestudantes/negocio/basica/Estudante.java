@@ -13,6 +13,14 @@ public class Estudante extends Usuario {
     private List<Horario> horarios;
     @OneToMany(mappedBy = "estudante", cascade = CascadeType.ALL)
     private List<RegistroAtividade> registros;
+    @OneToMany(mappedBy = "estudante", cascade = CascadeType.ALL)
+    private List<Vinculo> vinculos;
+    @OneToMany(mappedBy = "estudante", cascade = CascadeType.ALL)
+    private List<Funcao> funcoes;
+    @OneToMany(mappedBy = "estudante", cascade = CascadeType.ALL)
+    private List<Participacao> participacoes;
+
+
 
 
     public Estudante(boolean gestao, String nome, String email, String curso, String celular, String numeroRg, String orgaoExpedidor, String dataEmissao, String cpf, String estadoCivil, String nacionalidade, String naturalidade, String matricula) {
@@ -47,7 +55,7 @@ public class Estudante extends Usuario {
         return horarios;
     }
 
-    public void setHorarios(ArrayList<Horario> horarios) {
+    public void setHorarios(List<Horario> horarios) {
         this.horarios = horarios;
 
 
@@ -61,11 +69,47 @@ public class Estudante extends Usuario {
         return registros;
     }
 
-    public void setRegistros(ArrayList<RegistroAtividade> registros) {
+    public void setRegistros(List<RegistroAtividade> registros) {
         this.registros = registros;
     }
     public void addRegistro(RegistroAtividade registro){
         this.registros.add(registro);
         registro.setEstudante(this);
+    }
+
+    public List<Vinculo> getVinculos() {
+        return vinculos;
+    }
+
+    public void setVinculos(List<Vinculo> vinculos) {
+        this.vinculos = vinculos;
+    }
+    public void addVinculo(Vinculo vinculo){
+        this.vinculos.add(vinculo);
+        vinculo.setEstudante(this);
+    }
+
+    public List<Funcao> getFuncoes() {
+        return funcoes;
+    }
+
+    public void setFuncoes(List<Funcao> funcoes) {
+        this.funcoes = funcoes;
+    }
+    public void addFuncao(Funcao funcao){
+        this.funcoes.add(funcao);
+        funcao.setEstudante(this);
+    }
+
+    public List<Participacao> getParticipacoes() {
+        return participacoes;
+    }
+
+    public void setParticipacoes(List<Participacao> participacoes) {
+        this.participacoes = participacoes;
+    }
+    public void addParticipacao(Participacao participacao){
+        this.setParticipacoes(participacoes);
+        participacao.setEstudante(this);
     }
 }

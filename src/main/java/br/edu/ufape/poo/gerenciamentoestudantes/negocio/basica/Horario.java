@@ -1,5 +1,7 @@
 package br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica;
 
+import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Enum.DiaSemana;
+import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Enum.ModalidadeAtividade;
 import jakarta.persistence.*;
 
 @Entity
@@ -11,6 +13,7 @@ public class Horario {
     @JoinColumn(name = "estudante")
     private Estudante estudante;
     @OneToOne
+    @JoinColumn(name = "registroAtividade")
     private RegistroAtividade registro;
     private ModalidadeAtividade mdodalidade;
     private DiaSemana dia;
