@@ -15,7 +15,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-public class InterfaceColecaoEstudanteTeste {
+public class InterfaceColecaoEstudanteTeste{
     @Autowired
     private InterfaceColecaoEstudante ColecaoEstudante;
     private ArrayList<Horario> horarios;
@@ -38,7 +38,7 @@ public class InterfaceColecaoEstudanteTeste {
         Horario h1 = new Horario(ModalidadeAtividade.PRESENCIAL, DiaSemana.SEGUNDA,"14:00", "17:00");
         Horario h2 = new Horario(ModalidadeAtividade.REMOTO, DiaSemana.QUARTA,"14:00", "17:00");
         //Iniciando o ArrayList
-        horarios = new ArrayList<>(5);
+        horarios = new ArrayList<Horario>();
         e.setHorarios(horarios);
         //adicionando os horarios no ArrayList
         e.addHorario(h1);
@@ -47,12 +47,12 @@ public class InterfaceColecaoEstudanteTeste {
         RegistroAtividade reg = new RegistroAtividade("fiz nada nessa desgraca nao");
         //Iniciando o ArrayList
         reg.setHorario(h1);
-        registros = new ArrayList<>(5);
+        registros = new ArrayList<RegistroAtividade>();
         e.setRegistros(registros);
         //Adicionando o registro
         e.addRegistro(reg);
         //Integracao com vinculo
-        vinculos = new ArrayList<>(5);
+        vinculos = new ArrayList<Vinculo>();
         e.setVinculos(vinculos);
         Vinculo vinc = new Vinculo(TipoVinculo.VOLUNTARIO,"10:00", "20/15/2021");
         e.addVinculo(vinc);
@@ -62,7 +62,7 @@ public class InterfaceColecaoEstudanteTeste {
         Funcao func = new Funcao(TipoFuncao.SCRUM_MASTER,"12/08/2000");
         e.addFuncao(func);
         //Integracao participacao
-        projetos = new ArrayList<>(5);
+        projetos = new ArrayList<Projeto>();
         Projeto projeto = new Projeto("ten","que matar um","15/02/2022","java", "agro","clienteServidor");
         participacoes = new ArrayList<>(5);
         e.setParticipacoes(participacoes);
@@ -70,7 +70,8 @@ public class InterfaceColecaoEstudanteTeste {
         part.setEstudante(e);
         part.setProjeto(projeto);
         e.addParticipacao(part);
-
+        //salvando bolsa
+        Bolsa b =  new Bolsa("se fudeo", "vai ganhar money", "12/12/22", "15/01/23");
 
         //salvando na colecao
         ColecaoEstudante.save(e);

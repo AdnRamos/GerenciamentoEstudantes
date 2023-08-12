@@ -19,11 +19,10 @@ public class Projeto {
     private String linguagensDeDesenvolvimento;
     private String compoDeAplicacao;
     private String tipoSistema;
-    @ManyToMany
-    private List<Estudante> desenvolvedores;
-    @ManyToMany
+    @OneToMany(mappedBy = "projeto", cascade = CascadeType.ALL)
     private List<Participacao> participacoes;
-    //private Orientador orientador;
+    @ManyToOne
+    private Orientador orientador;
     @OneToOne
     private Estudante scrumMaster;
 
@@ -103,16 +102,13 @@ public class Projeto {
         this.tipoSistema = tipoSistema;
     }
 
-    public List<Estudante> getDesenvolvedores() {
-        return desenvolvedores;
+
+    public Orientador getOrientador() {
+        return orientador;
     }
 
-    public void setDesenvolvedores(List<Estudante> desenvolvedores) {
-        this.desenvolvedores = desenvolvedores;
-    }
-    public void addDesenvolvedor(Estudante estudante){
-        this.setDesenvolvedores(desenvolvedores);
-        desenvolvedores.add(estudante);
+    public void setOrientador(Orientador orientador) {
+        this.orientador = orientador;
     }
 
     public Estudante getScrumMaster() {
