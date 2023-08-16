@@ -1,6 +1,7 @@
-package br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica;
+package br.edu.ufape.poo.gerenciamentoestudantes.dados;
 
 import br.edu.ufape.poo.gerenciamentoestudantes.dados.InterfaceColecaoEstudante;
+import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.*;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Enum.DiaSemana;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Enum.ModalidadeAtividade;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Enum.TipoFuncao;

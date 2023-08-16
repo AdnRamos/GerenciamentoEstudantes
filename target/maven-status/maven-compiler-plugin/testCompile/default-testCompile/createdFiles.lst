@@ -1,0 +1,14 @@
+br/edu/ufape/poo/gerenciamentoestudantes/dados/InterfaceColecaoParticipacaoTeste.class
+br/edu/ufape/poo/gerenciamentoestudantes/dados/InterfaceColecaoHorarioTeste.class
+br/edu/ufape/poo/gerenciamentoestudantes/dados/InterfaceColecaoVinculoTeste.class
+br/edu/ufape/poo/gerenciamentoestudantes/dados/InterfaceColecaoDocumentoTeste.class
+br/edu/ufape/poo/gerenciamentoestudantes/dados/InterfaceColecaoEstudanteTeste.class
+br/edu/ufape/poo/gerenciamentoestudantes/dados/InterfaceColecaoFuncaoTeste.class
+br/edu/ufape/poo/gerenciamentoestudantes/negocio/cadastro/CadastroEstudanteTeste.class
+br/edu/ufape/poo/gerenciamentoestudantes/dados/InterfaceColecaoProjetoTeste.class
+br/edu/ufape/poo/gerenciamentoestudantes/GerenciamentoEstudantesApplicationTests.class
+br/edu/ufape/poo/gerenciamentoestudantes/dados/InterfaceColecaoBolsaTeste.class
+br/edu/ufape/poo/gerenciamentoestudantes/dados/InterfaceColecaoRegistroTeste.class
+br/edu/ufape/poo/gerenciamentoestudantes/dados/InterfaceColecaoInscricaoTeste.class
+br/edu/ufape/poo/gerenciamentoestudantes/negocio/fachada/FachadaTeste.class
+br/edu/ufape/poo/gerenciamentoestudantes/dados/InterfaceColecaoOrientadorTest.class

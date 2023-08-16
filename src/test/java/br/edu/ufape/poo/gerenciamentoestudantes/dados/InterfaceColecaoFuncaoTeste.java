@@ -1,7 +1,8 @@
-package br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica;
+package br.edu.ufape.poo.gerenciamentoestudantes.dados;
 
 import br.edu.ufape.poo.gerenciamentoestudantes.dados.InterfaceColecaoFuncao;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Enum.TipoFuncao;
+import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Funcao;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

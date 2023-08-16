@@ -1,6 +1,7 @@
-package br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica;
+package br.edu.ufape.poo.gerenciamentoestudantes.dados;
 
 import br.edu.ufape.poo.gerenciamentoestudantes.dados.InterfaceColecaoProjeto;
+import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Projeto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

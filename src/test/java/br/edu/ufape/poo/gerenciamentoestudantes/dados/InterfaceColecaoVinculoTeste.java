@@ -1,7 +1,8 @@
-package br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica;
+package br.edu.ufape.poo.gerenciamentoestudantes.dados;
 
 import br.edu.ufape.poo.gerenciamentoestudantes.dados.InterfaceColecaoVinculo;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Enum.TipoVinculo;
+import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Vinculo;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
