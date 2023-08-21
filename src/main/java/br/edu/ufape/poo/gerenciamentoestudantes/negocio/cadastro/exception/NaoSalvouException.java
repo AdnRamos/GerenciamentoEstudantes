@@ -9,10 +9,4 @@ public class NaoSalvouException extends RuntimeException{
         super(mensagem, causa);
     }
 
-    public static class EstudanteNaoEncontradoException extends RuntimeException {
-
-        public EstudanteNaoEncontradoException(Long id) {
-            super("Estudante com ID " + id + " não foi encontrado.");
-        }
-    }
 }

@@ -5,10 +5,7 @@ import br.edu.ufape.poo.gerenciamentoestudantes.dados.InterfaceColecaoVinculo;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Enums.TipoVinculo;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Estudante;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Vinculo;
-import br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro.exception.NaoSalvouException;
-import br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro.exception.UsuarioNaoExisteException;
-import br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro.exception.VinculoDuplicadoException;
-import br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro.exception.VinculoNaoEncontradoException;
+import br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro.exception.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +26,7 @@ public class CadastroVinculo implements InterfaceCadastroVinculo {
         }
         System.out.println("Buscando estudante no banco de dados com ID: " + estudante.getId());
         Estudante estudanteExistente = colecaoEstudante.findById(estudante.getId())
-                .orElseThrow(() -> new NaoSalvouException.EstudanteNaoEncontradoException(estudante.getId()));
+                .orElseThrow(() -> new EstudanteNaoEncontradoException(estudante.getId()));
         System.out.println("Estudante encontrado: " + estudanteExistente.getNome());
         estudante.addVinculo(vinculo);
         colecaoEstudante.save(estudanteExistente);

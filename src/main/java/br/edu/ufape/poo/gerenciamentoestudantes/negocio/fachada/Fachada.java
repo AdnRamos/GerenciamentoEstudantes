@@ -1,20 +1,9 @@
 package br.edu.ufape.poo.gerenciamentoestudantes.negocio.fachada;
 
-import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Enums.DiaSemana;
-import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Enums.ModalidadeAtividade;
+import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.*;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Enums.TipoVinculo;
-import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Estudante;
-import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Horario;
-import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Orientador;
-import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Vinculo;
-import br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro.InterfaceCadastroEstudante;
-import br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro.InterfaceCadastroHorario;
-import br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro.InterfaceCadastroOrientador;
-import br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro.InterfaceCadastroVinculo;
-import br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro.exception.HorarioDuplicadoException;
-import br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro.exception.HorarioNaoEncontradoException;
-import br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro.exception.UsuarioDuplicadoException;
-import br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro.exception.UsuarioNaoExisteException;
+import br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro.*;
+import br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro.exception.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +19,8 @@ public class Fachada {
     private InterfaceCadastroHorario cadastroHorario;
     @Autowired
     private InterfaceCadastroVinculo cadastroVinculo;
+    @Autowired
+    private InterfaceCadastrarRegistroAtividades cadastrarRegistroAtividades;
 
 
     //Estudante:
@@ -111,5 +102,25 @@ public class Fachada {
         return cadastroVinculo.verificarExistenciaVinculo(estudante, tipoVinculo, dataInicio, dataFim);
     }
 
-    //
+    //Registro de Atividades
+
+    public RegistroAtividade cadastrarRegistroAtividade(RegistroAtividade registroAtividade) {
+        return cadastrarRegistroAtividades.salvarRegistroAtividade(registroAtividade);
+    }
+
+    public RegistroAtividade buscarRegistroAtividadePorId(long id) {
+        return cadastrarRegistroAtividades.buscarRegistroAtividadePorId(id);
+    }
+
+    public List<RegistroAtividade> buscarTodosRegistrosAtividade() {
+        return cadastrarRegistroAtividades.buscarTodosRegistrosAtividade();
+    }
+
+    public RegistroAtividade atualizarRegistroAtividade(RegistroAtividade registroAtividade) throws RegistroAtividadeNaoEncontradoException, RegistroAtividadeDuplicadoException {
+        return cadastrarRegistroAtividades.atualizarRegistroAtividade(registroAtividade);
+    }
+
+    public void excluirRegistroAtividade(long id) throws RegistroAtividadeNaoEncontradoException {
+        cadastrarRegistroAtividades.excluirRegistroAtividade(id);
+    }
 }
