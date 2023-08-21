@@ -21,6 +21,8 @@ public class Fachada {
     private InterfaceCadastroVinculo cadastroVinculo;
     @Autowired
     private InterfaceCadastrarRegistroAtividades cadastrarRegistroAtividades;
+    @Autowired
+    private InterfaceCadastroDocumento cadastroDocumento;
 
 
     //Estudante:
@@ -122,5 +124,22 @@ public class Fachada {
 
     public void excluirRegistroAtividade(long id) throws RegistroAtividadeNaoEncontradoException {
         cadastrarRegistroAtividades.excluirRegistroAtividade(id);
+    }
+    //Documentos
+
+    public Documento salvarDocumento(Documento documento) throws DocumentoInvalidoException {
+        return cadastroDocumento.salvarDocumento(documento);
+    }
+
+    public Documento buscarDocumentoPorId(long id) {
+        return cadastroDocumento.buscarDocumentoPorId(id);
+    }
+
+    public Documento atualizarDocumento(Documento documento) {
+        return cadastroDocumento.atualizarDocumento(documento);
+    }
+
+    public void deletarDocumento(long id) {
+        cadastroDocumento.deletarDocumento(id);
     }
 }
