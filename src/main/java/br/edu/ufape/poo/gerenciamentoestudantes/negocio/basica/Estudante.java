@@ -7,6 +7,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "estudante")
+@PrimaryKeyJoinColumn
 public class Estudante extends Usuario {
 
     //Duvidaa: é nescessario criar um id para as classes que herdam usuario?
@@ -18,7 +19,7 @@ public class Estudante extends Usuario {
     private List<Horario> horarios;
     @OneToMany(mappedBy = "estudante", cascade = CascadeType.ALL)
     private List<RegistroAtividade> registros;
-    @OneToMany(mappedBy = "estudante", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "estudante", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Vinculo> vinculos;
     @OneToMany(mappedBy = "estudante", cascade = CascadeType.ALL)
     private List<Funcao> funcoes;
@@ -33,19 +34,35 @@ public class Estudante extends Usuario {
     public Estudante(boolean gestao, String nome, String email, String curso, String celular, String numeroRg, String orgaoExpedidor, String dataEmissao, String cpf, String estadoCivil, String nacionalidade, String naturalidade, String matricula) {
         super(gestao, nome, email, curso, celular, numeroRg, orgaoExpedidor, dataEmissao, cpf, estadoCivil, nacionalidade, naturalidade);
         this.matricula = matricula;
-
+        this.matricula = matricula;
+        this.horarios = new ArrayList<>();
+        this.registros = new ArrayList<>();
+        this.vinculos = new ArrayList<>();
+        this.funcoes = new ArrayList<>();
+        this.participacoes = new ArrayList<>();
+        this.inscricao = new ArrayList<>();
     }
 
     public Estudante(boolean gestao, String nome, String email, String matricula) {
         super(gestao, nome, email);
         this.matricula = matricula;
-
-
+        this.horarios = new ArrayList<>();
+        this.registros = new ArrayList<>();
+        this.vinculos = new ArrayList<>();
+        this.funcoes = new ArrayList<>();
+        this.participacoes = new ArrayList<>();
+        this.inscricao = new ArrayList<>();
     }
 
     public Estudante(String matricula) {
         this.matricula = matricula;
-
+        this.matricula = matricula;
+        this.horarios = new ArrayList<>();
+        this.registros = new ArrayList<>();
+        this.vinculos = new ArrayList<>();
+        this.funcoes = new ArrayList<>();
+        this.participacoes = new ArrayList<>();
+        this.inscricao = new ArrayList<>();
     }
     public Estudante() {
 

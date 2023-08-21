@@ -4,7 +4,7 @@ public class UsuarioNaoExisteException extends Exception{
     private String email;
 
     public UsuarioNaoExisteException(String email){
-        super("Não usuario com email cadastrado.");
+        super("Não  usuario com email cadastrado.");
         this.email = email;
     }
 

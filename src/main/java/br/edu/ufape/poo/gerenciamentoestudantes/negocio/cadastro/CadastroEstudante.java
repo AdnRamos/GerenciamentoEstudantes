@@ -10,12 +10,35 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class PrePreCadastroEstudante implements InterfacePreCadastroEstudante {
+public class CadastroEstudante implements InterfaceCadastroEstudante {
     @Autowired
     private InterfaceColecaoEstudante colecaoEstudante;
 
+    //CRUD
+    @Override
+    public List<Estudante> listarEstudantes() {
+        return colecaoEstudante.findAll();
+    }
+
+    @Override
+    public Estudante salvarEstudante(Estudante entity) throws UsuarioDuplicadoException {
+        try{
+            consultarEstudantePorEmail(entity.getEmail());
+            throw new UsuarioDuplicadoException(entity.getEmail());
+        }catch (UsuarioNaoExisteException err){
+            return colecaoEstudante.save(entity);
+        }
+    }
+
+    @Override
+    public void removerUsuarioEmail(String email) throws UsuarioNaoExisteException {
+        Estudante e = consultarEstudantePorEmail(email);
+        colecaoEstudante.delete(e);
+    }
+    //Consultar por:
     @Override
     public Estudante consultarEstudantePorId(Long id) {
+
         return colecaoEstudante.findById(id).orElse(null);
     }
 
@@ -44,32 +67,11 @@ public class PrePreCadastroEstudante implements InterfacePreCadastroEstudante {
         return e;
     }
 
-
-    @Override
-    public List<Estudante> listarEstudantes() {
-        return colecaoEstudante.findAll();
-    }
-
-    @Override
-    public Estudante salvarEstudante(Estudante entity) throws UsuarioDuplicadoException {
-        try{
-            consultarEstudantePorEmail(entity.getEmail());
-            throw new UsuarioDuplicadoException(entity.getEmail());
-        }catch (UsuarioNaoExisteException err){
-            return colecaoEstudante.save(entity);
-        }
-    }
-
-
-
+    //Verificar existencia
     @Override
     public boolean verificarExistenciaEstudanteId(Long id) {
+
         return colecaoEstudante.existsById(id);
     }
 
-    @Override
-    public void removerUsuarioEmail(String email) throws UsuarioNaoExisteException {
-        Estudante e = consultarEstudantePorEmail(email);
-        colecaoEstudante.delete(e);
-    }
 }

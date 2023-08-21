@@ -6,18 +6,19 @@ import br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro.exception.Usuar
 
 import java.util.List;
 
-public interface InterfacePreCadastroEstudante {
+public interface InterfaceCadastroEstudante {
+
+    //Crud
+    List<Estudante> listarEstudantes();
+    Estudante salvarEstudante(Estudante entity) throws UsuarioDuplicadoException;
+    void removerUsuarioEmail(String email) throws UsuarioNaoExisteException;
+
+    //Verificar existência:
+    boolean verificarExistenciaEstudanteId(Long id);
+
+    //consultar por:
     Estudante consultarEstudantePorId(Long id);
     Estudante consultarEstudantePorEmail(String email) throws UsuarioNaoExisteException;
     Estudante consultarEstudantePorNome(String nome) throws UsuarioNaoExisteException;
     Estudante consultarEstudantePorMatricula(String matricula) throws UsuarioNaoExisteException;
-
-    List<Estudante> listarEstudantes();
-
-    Estudante salvarEstudante(Estudante entity) throws UsuarioDuplicadoException;
-
-
-    boolean verificarExistenciaEstudanteId(Long id);
-
-    void removerUsuarioEmail(String email) throws UsuarioNaoExisteException;
 }

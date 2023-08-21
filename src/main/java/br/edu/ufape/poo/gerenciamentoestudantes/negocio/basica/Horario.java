@@ -1,7 +1,7 @@
 package br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica;
 
-import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Enum.DiaSemana;
-import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Enum.ModalidadeAtividade;
+import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Enums.DiaSemana;
+import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Enums.ModalidadeAtividade;
 import jakarta.persistence.*;
 
 @Entity
@@ -15,7 +15,7 @@ public class Horario {
     @OneToOne
     @JoinColumn(name = "registroAtividade")
     private RegistroAtividade registro;
-    private ModalidadeAtividade mdodalidade;
+    private ModalidadeAtividade modalidade;
     private DiaSemana dia;
     private String horaInicio;
     private String horaFim;
@@ -25,7 +25,7 @@ public class Horario {
 
     public Horario(ModalidadeAtividade modalidade, DiaSemana dia, String horaInicio, String horaFim) {
         super();
-        this.mdodalidade = modalidade;
+        this.modalidade = modalidade;
         this.dia = dia;
         this.horaInicio = horaInicio;
         this.horaFim = horaFim;
@@ -55,19 +55,19 @@ public class Horario {
         this.registro = registro;
     }
 
-    public ModalidadeAtividade getMdodalidade() {
-        return mdodalidade;
+    public ModalidadeAtividade getModalidade() {
+        return modalidade;
     }
 
-    public void setMdodalidade(ModalidadeAtividade mdodalidade) {
-        this.mdodalidade = mdodalidade;
+    public void setModalidade(ModalidadeAtividade mdodalidade) {
+        this.modalidade = mdodalidade;
     }
 
-    public DiaSemana getDia() {
+    public DiaSemana getDiaSemana() {
         return dia;
     }
 
-    public void setDia(DiaSemana dia) {
+    public void setDiaSemana(DiaSemana dia) {
         this.dia = dia;
     }
 

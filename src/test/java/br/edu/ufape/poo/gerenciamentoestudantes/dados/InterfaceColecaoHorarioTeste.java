@@ -1,8 +1,7 @@
 package br.edu.ufape.poo.gerenciamentoestudantes.dados;
 
-import br.edu.ufape.poo.gerenciamentoestudantes.dados.InterfaceColecaoHorario;
-import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Enum.DiaSemana;
-import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Enum.ModalidadeAtividade;
+import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Enums.DiaSemana;
+import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Enums.ModalidadeAtividade;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Horario;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

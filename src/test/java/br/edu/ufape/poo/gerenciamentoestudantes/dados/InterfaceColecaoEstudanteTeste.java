@@ -1,11 +1,10 @@
 package br.edu.ufape.poo.gerenciamentoestudantes.dados;
 
-import br.edu.ufape.poo.gerenciamentoestudantes.dados.InterfaceColecaoEstudante;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.*;
-import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Enum.DiaSemana;
-import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Enum.ModalidadeAtividade;
-import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Enum.TipoFuncao;
-import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Enum.TipoVinculo;
+import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Enums.DiaSemana;
+import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Enums.ModalidadeAtividade;
+import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Enums.TipoFuncao;
+import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Enums.TipoVinculo;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,6 +1,6 @@
 package br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica;
 
-import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Enum.TipoVinculo;
+import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Enums.TipoVinculo;
 import jakarta.persistence.*;
 
 @Entity
@@ -11,6 +11,7 @@ public class Vinculo {
     private long id;
     @ManyToOne
     private Estudante estudante;
+    private boolean ativo;
 
     private TipoVinculo tipoVinculo;
 
@@ -43,6 +44,14 @@ public class Vinculo {
         this.estudante = estudante;
     }
 
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
+    }
+
     public TipoVinculo getTipoVinculo() {
         return tipoVinculo;
     }
@@ -55,11 +64,11 @@ public class Vinculo {
         return qtdHorasSemanais;
     }
 
-    public void getQtdHorasSemanais(String qtdHoras) {
-        this.qtdHorasSemanais = qtdHoras;
+    public void setQtdHorasSemanais(String qtdHorasSemanais) {
+        this.qtdHorasSemanais = qtdHorasSemanais;
     }
 
-    public String setQtdHorasSemanais() {
+    public String getDataInicio() {
         return dataInicio;
     }
 

@@ -27,14 +27,14 @@ public class FachadaTeste {
     //nao sei por que ta passando esse teste essa desgraça
     @Test
     void atuailzarEstudante() throws UsuarioDuplicadoException, UsuarioNaoExisteException{
-        Estudante e = fachada.buscarEstudanteId(1L);
+        Estudante e = fachada.procurarEstudanteId(1L);
         Estudante temp = e;
         e.setEmail("jojo@ufape.edu.br");
         e.setNome("Jojo");
         e.setGestao(false);
-        fachada.buscarEstudanteId(1L);
+        fachada.procurarEstudanteId(1L);
 
-        //assertEquals(e.getEmail(), temp.getEmail());
+        assertEquals(e.getEmail(), temp.getEmail());
     }
 
 }
