@@ -48,7 +48,9 @@ public class CadastroAtividadeTest {
         // Tentar cadastrar o mesmo registro duas vezes deve lançar a exceção RegistroAtividadeDuplicadoException
         cadastroAtividade.salvarRegistroAtividade(atividadeDuplicada);
 
-        assertThrows(RegistroAtividadeDuplicadoException.class, () -> cadastroAtividade.salvarRegistroAtividade(atividadeDuplicada));
+        assertThrows(RegistroAtividadeDuplicadoException.class, () -> {
+            cadastroAtividade.salvarRegistroAtividade(atividadeDuplicada);
+        });
     }
     //Teste de Integração
     @Test
