@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface
 InterfaceColecaoBolsa extends JpaRepository<Bolsa, Long> {
+    boolean existsByDescricao(String descricao);
 }

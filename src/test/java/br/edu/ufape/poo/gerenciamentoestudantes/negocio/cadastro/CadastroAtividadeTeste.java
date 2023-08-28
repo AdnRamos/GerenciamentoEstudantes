@@ -39,16 +39,11 @@ public class CadastroAtividadeTeste {
         assertEquals(resultado.getId(), registroCadastrado.getId());
     }
     @Test
-    @Disabled("Teste Criado para dar erro!")
     public void cadastrarRegistroAtividadeDuplicadoTeste() throws RegistroAtividadeDuplicadoException {
         // Criar um registro de atividade para teste
-        RegistroAtividade registroAtividade = new RegistroAtividade();
-        registroAtividade.setDescricao("Atividade Duplicada");
+        RegistroAtividade registroAtividade = new RegistroAtividade("O que ta acontecendo aqui");
 
-        // Cadastrar o primeiro registro de atividade
-        cadastroAtividade.salvarRegistroAtividade(registroAtividade);
-
-        // Tentar cadastrar o mesmo registro novamente
+        // Tentar cadastrar o mesmo registro novamente deve lançar a exceção RegistroAtividadeDuplicadoException
         assertThrows(RegistroAtividadeDuplicadoException.class, () -> {
             cadastroAtividade.salvarRegistroAtividade(registroAtividade);
         });
@@ -57,10 +52,10 @@ public class CadastroAtividadeTeste {
     @Test
     public void CadastroRegistroAtividadeComEstudanteTeste() throws UsuarioDuplicadoException {
         //criando estudante
-        Estudante estudante = new Estudante("12312314");
+        Estudante estudante = new Estudante("werqwerqwerqw");
         cadastroEstudante.salvarEstudante(estudante);
         //criando atividade
-        RegistroAtividade registroAtividade = new RegistroAtividade("Atividade 1");
+        RegistroAtividade registroAtividade = new RegistroAtividade("qwerqwerqwerqwer 1");
         registroAtividade.setEstudante(estudante);
         cadastroAtividade.salvarRegistroAtividade(registroAtividade);
 

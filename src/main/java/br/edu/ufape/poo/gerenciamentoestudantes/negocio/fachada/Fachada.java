@@ -1,6 +1,7 @@
 package br.edu.ufape.poo.gerenciamentoestudantes.negocio.fachada;
 
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.*;
+import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Enums.TipoFuncao;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Enums.TipoVinculo;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro.*;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro.exception.*;
@@ -23,6 +24,12 @@ public class Fachada {
     private InterfaceCadastrarRegistroAtividades cadastrarRegistroAtividades;
     @Autowired
     private InterfaceCadastroDocumento cadastroDocumento;
+    @Autowired
+    private InterfaceCadastroFuncao cadastroFuncao;
+    @Autowired
+    private InterfaceCadastroBolsa cadastroBolsa;
+    @Autowired
+    private InterfaceCadastroInscricao cadastroInscricao;
 
 
     //Estudante:
@@ -141,5 +148,71 @@ public class Fachada {
 
     public void deletarDocumento(long id) {
         cadastroDocumento.deletarDocumento(id);
+    }
+    //Funcao
+
+
+    public Funcao cadastrarFuncao(Estudante estudante, Funcao funcao) throws FuncaoDuplicadaException {
+        return cadastroFuncao.cadastrarFuncao(estudante, funcao);
+    }
+
+    public void atualizarFuncao(Funcao funcao) {
+        cadastroFuncao.atualizarFuncao(funcao);
+    }
+
+    public void deletarFuncao(long id) {
+        cadastroFuncao.deletarFuncao(id);
+    }
+
+    public Funcao buscarFuncaoPorId(long id) {
+        return cadastroFuncao.buscarFuncaoPorId(id);
+    }
+
+    public List<Funcao> buscarFuncoesPorEstudante(Estudante estudante) {
+        return cadastroFuncao.buscarFuncoesPorEstudante(estudante);
+    }
+
+    public void verificarFuncaoDuplicada(Estudante estudante, Funcao funcao) {
+        cadastroFuncao.verificarFuncaoDuplicada(estudante, funcao);
+    }
+    //Bolsa
+
+    public Bolsa cadastrarBolsa(Bolsa bolsa) throws BolsaDuplicadaException {
+        return cadastroBolsa.cadastrarBolsa(bolsa);
+    }
+
+    public Bolsa buscarBolsaPorId(long id) {
+        return cadastroBolsa.buscarBolsaPorId(id);
+    }
+
+    public List<Bolsa> listarBolsas() {
+        return cadastroBolsa.listarBolsas();
+    }
+
+    public Bolsa atualizarBolsa(Bolsa bolsa) {
+        return cadastroBolsa.atualizarBolsa(bolsa);
+    }
+
+    public void deletarBolsa(long id) {
+        cadastroBolsa.deletarBolsa(id);
+    }
+
+
+    //Inscricoes
+
+    public Inscricao cadastrarInscricao(Inscricao inscricao) throws InscricaoInvalidaException {
+        return cadastroInscricao.cadastrarInscricao(inscricao);
+    }
+
+    public List<Inscricao> listarInscricoesPorEstudante(Estudante estudante) {
+        return cadastroInscricao.listarInscricoesPorEstudante(estudante);
+    }
+
+    public Inscricao buscarInscricaoPorId(long id) throws InscricaoNaoEncontradaException {
+        return cadastroInscricao.buscarInscricaoPorId(id);
+    }
+
+    public void removerInscricaoPorId(long id) throws InscricaoNaoEncontradaException {
+        cadastroInscricao.removerInscricaoPorId(id);
     }
 }

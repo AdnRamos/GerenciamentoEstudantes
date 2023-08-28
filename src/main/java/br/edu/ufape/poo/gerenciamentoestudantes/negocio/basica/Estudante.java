@@ -28,7 +28,7 @@ public class Estudante extends Usuario {
     @ManyToOne
     private Orientador orientador;
     @OneToMany(mappedBy = "estudante", cascade = CascadeType.ALL)
-    private List<Inscricao> inscricao;
+    private List<Inscricao> inscricoes;
 
 
     public Estudante(boolean gestao, String nome, String email, String curso, String celular, String numeroRg, String orgaoExpedidor, String dataEmissao, String cpf, String estadoCivil, String nacionalidade, String naturalidade, String matricula) {
@@ -40,7 +40,7 @@ public class Estudante extends Usuario {
         this.vinculos = new ArrayList<>();
         this.funcoes = new ArrayList<>();
         this.participacoes = new ArrayList<>();
-        this.inscricao = new ArrayList<>();
+        this.inscricoes = new ArrayList<>();
     }
 
     public Estudante(boolean gestao, String nome, String email, String matricula) {
@@ -51,7 +51,7 @@ public class Estudante extends Usuario {
         this.vinculos = new ArrayList<>();
         this.funcoes = new ArrayList<>();
         this.participacoes = new ArrayList<>();
-        this.inscricao = new ArrayList<>();
+        this.inscricoes = new ArrayList<>();
     }
 
     public Estudante(String matricula) {
@@ -62,7 +62,7 @@ public class Estudante extends Usuario {
         this.vinculos = new ArrayList<>();
         this.funcoes = new ArrayList<>();
         this.participacoes = new ArrayList<>();
-        this.inscricao = new ArrayList<>();
+        this.inscricoes = new ArrayList<>();
     }
     public Estudante() {
 
@@ -155,12 +155,16 @@ public class Estudante extends Usuario {
         this.orientador = orientador;
     }
 
-    public List<Inscricao> getInscricao() {
-        return inscricao;
+    public List<Inscricao> getInscricoes() {
+        return inscricoes;
     }
 
-    public void setInscricao(List<Inscricao> inscricao) {
-        this.inscricao = inscricao;
+    public void setInscricoes(List<Inscricao> inscricao) {
+        this.inscricoes = inscricao;
+    }
+    public void addInscricao(Inscricao inscricao){
+        this.inscricoes.add(inscricao);
+        inscricao.setEstudante(this);
     }
 
 }

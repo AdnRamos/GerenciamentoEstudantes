@@ -29,9 +29,8 @@ public class CadastroDocumentoTeste {
     }
 
     @Test
-    @Disabled("Teste Criado para dar erro!")
     public void cadastrarDocumentoDuplicadoTeste() throws DocumentoInvalidoException {
-        Documento documento = new Documento("Documento1", "Descrição do Documento", "link1");
+        Documento documento = new Documento("desgraçaaaaa", "asdfasdfasdf do Documento", "link1");
 
         cadastroDocumento.salvarDocumento(documento);
 
@@ -40,11 +39,11 @@ public class CadastroDocumentoTeste {
 
     @Test
     public void buscarDocumentoPorIdTeste() throws DocumentoInvalidoException {
-        Documento documento = new Documento("Documento2", "Descrição do Documento", "link1");
+        Documento documento = new Documento("Documento2", "Descrição do Documento", "link2");
 
         cadastroDocumento.salvarDocumento(documento);
 
-        Documento encontrado = cadastroDocumento.buscarDocumentoPorId(1);
+        Documento encontrado = cadastroDocumento.buscarDocumentoPorId(documento.getId());
 
         assertNotNull(encontrado);
         assertEquals(documento.getId(), encontrado.getId());

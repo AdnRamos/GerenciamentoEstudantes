@@ -17,7 +17,7 @@ import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
-public class CadastroVinculoTest {
+public class CadastroVinculoTeste {
 
     @Autowired
     private InterfaceCadastroVinculo cadastroVinculo;

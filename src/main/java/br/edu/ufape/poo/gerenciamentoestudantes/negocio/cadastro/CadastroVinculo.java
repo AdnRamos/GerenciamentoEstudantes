@@ -26,7 +26,7 @@ public class CadastroVinculo implements InterfaceCadastroVinculo {
         }
         System.out.println("Buscando estudante no banco de dados com ID: " + estudante.getId());
         Estudante estudanteExistente = colecaoEstudante.findById(estudante.getId())
-                .orElseThrow(() -> new EstudanteNaoEncontradoException(estudante.getId()));
+                .orElseThrow(() -> new EstudanteNaoEncontradoException());
         System.out.println("Estudante encontrado: " + estudanteExistente.getNome());
         estudante.addVinculo(vinculo);
         colecaoEstudante.save(estudanteExistente);

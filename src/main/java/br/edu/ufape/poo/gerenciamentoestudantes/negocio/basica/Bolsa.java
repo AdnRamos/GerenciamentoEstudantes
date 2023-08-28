@@ -74,4 +74,8 @@ public class Bolsa {
     public void setInscricoes(List<Inscricao> inscricoes) {
         this.inscricoes = inscricoes;
     }
+    public void addInscricao(Inscricao inscricao){
+        this.inscricoes.add(inscricao);
+        inscricao.setBolsa(this);
+    }
 }

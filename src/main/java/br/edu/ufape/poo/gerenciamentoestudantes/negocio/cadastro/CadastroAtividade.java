@@ -63,16 +63,17 @@ public class CadastroAtividade implements InterfaceCadastrarRegistroAtividades {
         }
 
         colecaoRegistroAtividade.delete(registroExistente.get());
-    }    private boolean verificarExistenciaRegistroAtividadeDuplicado(RegistroAtividade registroAtividade) {
+    }
+    private boolean verificarExistenciaRegistroAtividadeDuplicado(RegistroAtividade registroAtividade) {
         // Consulta ao banco de dados para verificar se já existe um registro de atividade
 
         List<RegistroAtividade> registrosExistentes = colecaoRegistroAtividade
                 .findByEstudanteAndHorario(registroAtividade.getEstudante(), registroAtividade.getHorario());
 
-        // Verifique se algum registro de atividade já existe com a mesma data
+        // Verifique se algum registro de atividade já existe com o mesmo horário, excluindo o próprio registro atual
         for (RegistroAtividade registroExistente : registrosExistentes) {
-            if (registroExistente.getId() != registroAtividade.getId()) {
-                return true; // Já existe um registro de atividade com a mesma data
+            if (!registroExistente.equals(registroAtividade)) {
+                return true; // Já existe um registro de atividade com o mesmo horário
             }
         }
 
