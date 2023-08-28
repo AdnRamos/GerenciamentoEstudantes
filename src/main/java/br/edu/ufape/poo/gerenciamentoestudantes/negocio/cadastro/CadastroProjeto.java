@@ -1,7 +1,5 @@
 package br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro;
 
-package br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro;
-
 import br.edu.ufape.poo.gerenciamentoestudantes.dados.InterfaceColecaoProjeto;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Projeto;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro.exception.ProjetoDuplicadoException;
@@ -15,10 +13,10 @@ import java.util.List;
 public class CadastroProjeto {
 
     @Autowired
-    private InterfaceColecaoProjeto colecaoProjeto;
+    private InterfaceColecaoProjeto cadastroProjeto;
 
     public List<Projeto> listarProjetos() {
-        return colecaoProjeto.findAll();
+        return cadastroProjeto.findAll();
     }
 
     public Projeto salvarProjeto(Projeto projeto) throws ProjetoDuplicadoException {
@@ -26,27 +24,24 @@ public class CadastroProjeto {
             consultarProjetoPorNome(projeto.getNomeProjeto());
             throw new ProjetoDuplicadoException(projeto.getNomeProjeto());
         } catch (ProjetoNaoExisteException ignored) {
-            return colecaoProjeto.save(projeto);
+            return cadastroProjeto.save(projeto);
         }
     }
 
-    @Override
     public void removerProjetoPorNome(String nomeProjeto) throws ProjetoNaoExisteException {
         Projeto projeto = consultarProjetoPorNome(nomeProjeto);
-        colecaoProjeto.delete(projeto);
+        cadastroProjeto.delete(projeto);
     }
 
-    @Override
     public Projeto consultarProjetoPorNome(String nomeProjeto) throws ProjetoNaoExisteException {
-        Projeto projeto = colecaoProjeto.findByNomeProjeto(nomeProjeto);
+        Projeto projeto = cadastroProjeto.findByNomeProjeto(nomeProjeto);
         if (projeto == null) {
             throw new ProjetoNaoExisteException(nomeProjeto);
         }
         return projeto;
     }
 
-    @Override
     public boolean verificarExistenciaProjetoId(Long id) {
-        return colecaoProjeto.existsById(id);
+        return cadastroProjeto.existsById(id);
     }
 }

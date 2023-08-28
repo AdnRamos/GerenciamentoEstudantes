@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface InterfaceColecaoProjeto extends JpaRepository<Projeto, Long> {
+    Projeto findByNomeProjeto(String nomeProjeto);
 }
