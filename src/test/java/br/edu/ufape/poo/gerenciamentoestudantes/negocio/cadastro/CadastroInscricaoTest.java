@@ -3,26 +3,19 @@ package br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Bolsa;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Estudante;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Inscricao;
-import br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro.CadastroBolsa;
-import br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro.CadastroEstudante;
-import br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro.CadastroInscricao;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro.exception.InscricaoDuplicadaException;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro.exception.InscricaoNaoEncontradaException;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro.exception.UsuarioDuplicadoException;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 
 import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-public class CadastroInscricaoTeste {
+public class CadastroInscricaoTest {
 
     @Autowired
     private CadastroInscricao cadastroInscricao;
@@ -35,8 +28,8 @@ public class CadastroInscricaoTeste {
 
 
     @Test
-    public void testCadastrarInscricao() throws UsuarioDuplicadoException {
-        Estudante estudante = new Estudante(false, "galeroso", "@asuausdfn", "3452345235");
+    public void CadastrarInscricaoTeste() throws UsuarioDuplicadoException {
+        Estudante estudante = new Estudante(false, "galeroso", "@asdfasdvaaawsdabrh", "3452345235");
 
         Bolsa bolsa = new Bolsa("Descrição2c242 da Bolsa", "Edital 2023", "01/08/2023", "31/08/2023");
 
@@ -50,7 +43,7 @@ public class CadastroInscricaoTeste {
     }
 
     @Test
-    public void testBuscarInscricaoPorId() throws UsuarioDuplicadoException {
+    public void BuscarInscricaoPorIdTeste() throws UsuarioDuplicadoException {
         Estudante estudante = new Estudante(false, "galeroso", "@asuwerwrwausdfn", "3452345235");
         cadastroEstudante.salvarEstudante(estudante);
 
@@ -69,7 +62,7 @@ public class CadastroInscricaoTeste {
     }
 
     @Test
-    public void testBuscarInscricaoPorIdInexistente() {
+    public void BuscarInscricaoPorIdInexistenteTeste() {
         long idInexistente = 9999L;
         assertThrows(InscricaoNaoEncontradaException.class, () -> {
             cadastroInscricao.buscarInscricaoPorId(idInexistente);
@@ -77,7 +70,7 @@ public class CadastroInscricaoTeste {
     }
 
     @Test
-    public void testListarInscricoes() throws UsuarioDuplicadoException {
+    public void ListarInscricoesTeste() throws UsuarioDuplicadoException {
         Estudante estudante = new Estudante(false, "galeroso", "@24234234", "3452345235");
         Estudante estudante1 = new Estudante(false, "galeroso", "@efasdfa", "3452345235");
         cadastroEstudante.salvarEstudante(estudante);
@@ -96,7 +89,7 @@ public class CadastroInscricaoTeste {
     }
 
     @Test
-    public void testDeletarInscricao() throws UsuarioDuplicadoException {
+    public void DeletarInscricaoTeste() throws UsuarioDuplicadoException {
         Estudante estudante = new Estudante(false, "galeroso", "@werqwerqw", "3452345235");
         cadastroEstudante.salvarEstudante(estudante);
 
@@ -113,7 +106,7 @@ public class CadastroInscricaoTeste {
     }
 
     @Test
-    public void testCadastrarInscricaoDuplicada() throws UsuarioDuplicadoException {
+    public void CadastrarInscricaoDuplicadaTeste() throws UsuarioDuplicadoException {
         Estudante estudante = new Estudante(false, "galeroso", "@tehthrt", "3452345235");
         cadastroEstudante.salvarEstudante(estudante);
 

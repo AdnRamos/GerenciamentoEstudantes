@@ -13,13 +13,13 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
 @Transactional
-public class CadastroBolsaTeste {
+public class CadastroBolsaTest {
 
     @Autowired
     private CadastroBolsa cadastroBolsa;
 
     @Test
-    public void testSalvarBolsa() {
+    public void SalvarBolsaTeste() {
         Bolsa bolsa = new Bolsa("Descrição", "Edital", "Inicio", "Fim");
         cadastroBolsa.cadastrarBolsa(bolsa);
 
@@ -27,7 +27,7 @@ public class CadastroBolsaTeste {
     }
 
     @Test
-    public void testBuscarBolsaExistente() {
+    public void BuscarBolsaExistenteTeste() {
         Bolsa bolsa = new Bolsa("Descrição", "Edital", "Inicio", "Fim");
         cadastroBolsa.cadastrarBolsa(bolsa);
 
@@ -37,14 +37,14 @@ public class CadastroBolsaTeste {
     }
 
     @Test
-    public void testBuscarBolsaNaoExistente() {
+    public void BuscarBolsaNaoExistenteTeste() {
         assertThrows(BolsaNaoEncontradaException.class, () -> {
             cadastroBolsa.buscarBolsaPorId(9999L);
         });
     }
 
     @Test
-    public void testAtualizarBolsaExistente() {
+    public void AtualizarBolsaExistenteTeste() {
         Bolsa bolsa = new Bolsa("Descrição", "Edital", "Inicio", "Fim");
         cadastroBolsa.cadastrarBolsa(bolsa);
 
@@ -56,7 +56,7 @@ public class CadastroBolsaTeste {
     }
 
     @Test
-    public void testDeletarBolsa() {
+    public void DeletarBolsaTeste() {
         Bolsa bolsa = new Bolsa("Descrição", "Edital", "Inicio", "Fim");
         cadastroBolsa.cadastrarBolsa(bolsa);
 

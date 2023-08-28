@@ -17,9 +17,12 @@ public class CadastroAtividade implements InterfaceCadastrarRegistroAtividades {
 
     @Override
     public RegistroAtividade salvarRegistroAtividade(RegistroAtividade registroAtividade) {
-        if (verificarExistenciaRegistroAtividadeDuplicado(registroAtividade)) {
-            throw new RegistroAtividadeDuplicadoException("Registro de atividade já cadastrado");
+        if(registroAtividade.getEstudante() != null ){
+            if (verificarExistenciaRegistroAtividadeDuplicado(registroAtividade)) {
+                throw new RegistroAtividadeDuplicadoException("Registro de atividade já cadastrado");
+            }
         }
+
         return colecaoRegistroAtividade.save(registroAtividade);
     }
 

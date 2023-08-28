@@ -1,6 +1,5 @@
 package br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro;
 
-import br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro.CadastroOrientador;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro.exception.UsuarioDuplicadoException;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro.exception.UsuarioNaoExisteException;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Orientador;
@@ -15,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
 @SpringBootTest
-public class CadastroOrientadorTeste {
+public class CadastroOrientadorTest {
 
     @Autowired
     private CadastroOrientador cadastroOrientador;
@@ -24,7 +23,7 @@ public class CadastroOrientadorTeste {
     private InterfaceColecaoOrientador colecaoOrientador;
 
     @Test
-    public void testSalvarOrientador() throws UsuarioDuplicadoException, UsuarioNaoExisteException {
+    public void SalvarOrientadorTeste() throws UsuarioDuplicadoException, UsuarioNaoExisteException {
         Orientador orientador = new Orientador(); // Crie um objeto Orientador para o teste
         when(colecaoOrientador.save(orientador)).thenReturn(orientador);
 
@@ -34,7 +33,7 @@ public class CadastroOrientadorTeste {
     }
 
     @Test
-    public void testConsultarOrientadorPorEmailInexistente() {
+    public void ConsultarOrientadorPorEmailInexistenteTeste() {
         String emailInexistente = "email@inexistente.com";
         when(colecaoOrientador.findByEmail(emailInexistente)).thenReturn(null);
 
@@ -43,7 +42,7 @@ public class CadastroOrientadorTeste {
         });
     }
     @Test
-    public void testVerificarExistenciaOrientadorId() {
+    public void VerificarExistenciaOrientadorIdTeste() {
         Long idExistente = 1L;
         when(colecaoOrientador.existsById(idExistente)).thenReturn(true);
 
@@ -52,7 +51,7 @@ public class CadastroOrientadorTeste {
         assertTrue(existe);
     }
     @Test
-    public void testRemoverOrientadorPorEmail() throws UsuarioNaoExisteException {
+    public void RemoverOrientadorPorEmailTeste() throws UsuarioNaoExisteException {
         String emailParaRemover = "email@pararemover.com";
         Orientador orientador = new Orientador();
         when(colecaoOrientador.findByEmail(emailParaRemover)).thenReturn(orientador);
@@ -62,7 +61,7 @@ public class CadastroOrientadorTeste {
         verify(colecaoOrientador, times(1)).delete(orientador);
     }
     @Test
-    public void testRemoverOrientadorPorEmailInexistente() {
+    public void RemoverOrientadorPorEmailInexistenteTeste() {
         String emailInexistente = "email@inexistente.com";
         when(colecaoOrientador.findByEmail(emailInexistente)).thenReturn(null);
 

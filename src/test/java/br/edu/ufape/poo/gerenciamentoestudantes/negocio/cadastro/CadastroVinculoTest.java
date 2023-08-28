@@ -6,7 +6,6 @@ import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Vinculo;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro.exception.UsuarioDuplicadoException;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro.exception.UsuarioNaoExisteException;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro.exception.VinculoDuplicadoException;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,10 +13,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.time.LocalDate;
 
 import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
-public class CadastroVinculoTeste {
+public class CadastroVinculoTest {
 
     @Autowired
     private InterfaceCadastroVinculo cadastroVinculo;
@@ -25,13 +23,9 @@ public class CadastroVinculoTeste {
     private InterfaceCadastroEstudante cadastroEstudante;
 
 
-    @BeforeEach
-    public void setUp() throws UsuarioDuplicadoException {
-
-    }
 
     @Test
-    public void testSalvarVinculo() throws VinculoDuplicadoException, UsuarioNaoExisteException, UsuarioDuplicadoException {
+    public void SalvarVinculoTeste() throws VinculoDuplicadoException, UsuarioNaoExisteException, UsuarioDuplicadoException {
         // Instanciar o vinculo
         Vinculo vinculo = new Vinculo();
         vinculo.setTipoVinculo(TipoVinculo.BOLSISTA);

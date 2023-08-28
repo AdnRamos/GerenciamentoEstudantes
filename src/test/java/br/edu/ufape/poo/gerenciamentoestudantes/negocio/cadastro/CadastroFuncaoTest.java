@@ -3,8 +3,6 @@ package br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Enums.TipoFuncao;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Estudante;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Funcao;
-import br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro.CadastroEstudante;
-import br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro.CadastroFuncao;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro.exception.FuncaoDuplicadaException;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro.exception.FuncaoNaoEncontradaException;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro.exception.UsuarioDuplicadoException;
@@ -15,7 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-public class CadastroFuncaoTeste {
+public class CadastroFuncaoTest {
 
     @Autowired
     private CadastroFuncao cadastroFuncao;
@@ -24,7 +22,7 @@ public class CadastroFuncaoTeste {
     private CadastroEstudante cadastroEstudante;
 
     @Test
-    public void testCadastrarFuncao() throws UsuarioDuplicadoException {
+    public void CadastrarFuncaoTeste() throws UsuarioDuplicadoException {
         Estudante estudante = new Estudante(true, "jose", "aosidjfoaijsdofjasodjfoia", "5544552");
         cadastroEstudante.salvarEstudante(estudante); // Persiste o estudante
 
@@ -39,7 +37,7 @@ public class CadastroFuncaoTeste {
     }
 
     @Test
-    public void testCadastrarFuncaoDuplicada() throws UsuarioDuplicadoException {
+    public void CadastrarFuncaoDuplicadaTeste() throws UsuarioDuplicadoException {
         Estudante estudante = new Estudante(true, "jose", "asdfasdfasdfa", "5544552");
         cadastroEstudante.salvarEstudante(estudante); // Persiste o estudante
 
@@ -50,7 +48,7 @@ public class CadastroFuncaoTeste {
     }
 
     @Test
-    public void testBuscarFuncaoPorId() throws UsuarioDuplicadoException {
+    public void BuscarFuncaoPorIdTeste() throws UsuarioDuplicadoException {
         Estudante estudante = new Estudante(true, "jose", "2342342342", "5544552");
         cadastroEstudante.salvarEstudante(estudante); // Persiste o estudante
 
@@ -64,7 +62,7 @@ public class CadastroFuncaoTeste {
     }
 
     @Test
-    public void testBuscarFuncaoPorIdNaoEncontrada() {
+    public void BuscarFuncaoPorIdNaoEncontradaTeste() {
         assertThrows(FuncaoNaoEncontradaException.class, () -> cadastroFuncao.buscarFuncaoPorId(9999L));
     }
 

@@ -30,6 +30,8 @@ public class Fachada {
     private InterfaceCadastroBolsa cadastroBolsa;
     @Autowired
     private InterfaceCadastroInscricao cadastroInscricao;
+    @Autowired
+    private InterfaceCadastroParticipacao cadastroParticipacao;
 
 
     //Estudante:
@@ -214,5 +216,26 @@ public class Fachada {
 
     public void removerInscricaoPorId(long id) throws InscricaoNaoEncontradaException {
         cadastroInscricao.removerInscricaoPorId(id);
+    }
+    //participacao
+
+    public Participacao cadastrarParticipacao(Participacao participacao) throws ParticipacaoDuplicadaException {
+        return cadastroParticipacao.cadastrarParticipacao(participacao);
+    }
+
+    public void removerParticipacao(Participacao participacao) throws ParticipacaoNaoEncontradaException {
+        cadastroParticipacao.removerParticipacao(participacao);
+    }
+
+    public Participacao consultarParticipacaoPorId(long id) throws ParticipacaoNaoEncontradaException {
+        return cadastroParticipacao.consultarParticipacaoPorId(id);
+    }
+
+    public List<Participacao> listarParticipacoesPorEstudante(Estudante estudante) {
+        return cadastroParticipacao.listarParticipacoesPorEstudante(estudante);
+    }
+
+    public List<Participacao> listarParticipacoesPorProjeto(Projeto projeto) {
+        return cadastroParticipacao.listarParticipacoesPorProjeto(projeto);
     }
 }

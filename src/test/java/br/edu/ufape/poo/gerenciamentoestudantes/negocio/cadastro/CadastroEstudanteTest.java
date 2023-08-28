@@ -10,7 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-public class CadastroEstudanteTeste {
+public class CadastroEstudanteTest {
     @Autowired
     private InterfaceCadastroEstudante cadastroEstudante;
     @Test
