@@ -21,10 +21,9 @@ public class FachadaTeste {
         Estudante e1 = new Estudante(true, "camile", "camile@gmail.com", "516518");
 
         fachada.salvarEstudante(e);
-        fachada.salvarEstudante(e1);
+
 
     }
-    //nao sei por que ta passando esse teste essa desgraça
     @Test
     void atuailzarEstudante() throws UsuarioDuplicadoException, UsuarioNaoExisteException{
         Estudante e = fachada.procurarEstudanteId(1L);

@@ -1,7 +1,6 @@
 package br.edu.ufape.poo.gerenciamentoestudantes.negocio.fachada;
 
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.*;
-import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Enums.TipoFuncao;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Enums.TipoVinculo;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro.*;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro.exception.*;

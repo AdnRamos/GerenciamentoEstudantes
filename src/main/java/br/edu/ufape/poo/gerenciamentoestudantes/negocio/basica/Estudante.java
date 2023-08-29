@@ -34,7 +34,6 @@ public class Estudante extends Usuario {
     public Estudante(boolean gestao, String nome, String email, String curso, String celular, String numeroRg, String orgaoExpedidor, String dataEmissao, String cpf, String estadoCivil, String nacionalidade, String naturalidade, String matricula) {
         super(gestao, nome, email, curso, celular, numeroRg, orgaoExpedidor, dataEmissao, cpf, estadoCivil, nacionalidade, naturalidade);
         this.matricula = matricula;
-        this.matricula = matricula;
         this.horarios = new ArrayList<>();
         this.registros = new ArrayList<>();
         this.vinculos = new ArrayList<>();
@@ -55,7 +54,6 @@ public class Estudante extends Usuario {
     }
 
     public Estudante(String matricula) {
-        this.matricula = matricula;
         this.matricula = matricula;
         this.horarios = new ArrayList<>();
         this.registros = new ArrayList<>();
