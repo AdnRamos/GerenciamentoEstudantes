@@ -60,8 +60,8 @@ public class CadastroEstudante implements InterfaceCadastroEstudante {
     }
     @Override
     public Estudante consultarEstudantePorMatricula(String matricula) throws UsuarioNaoExisteException {
-        Estudante e = colecaoEstudante.findByEmail(matricula);
-        if(e == null){
+        Estudante e = colecaoEstudante.findByMatricula(matricula); // Usar findByMatricula aqui
+        if (e == null) {
             throw new UsuarioNaoExisteException(matricula);
         }
         return e;

@@ -9,4 +9,6 @@ import org.springframework.stereotype.Repository;
 public interface InterfaceColecaoEstudante extends JpaRepository<Estudante, Long> {
     public Estudante findByEmail(String email);
     public Estudante findByNome(String nome);
+
+    Estudante findByMatricula(String matricula);
 }

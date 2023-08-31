@@ -86,8 +86,9 @@ public class Fachada {
         return cadastroHorario.salvarHorario(entity);
     }
 
-    public void atualizarHorario(Horario entity) throws HorarioNaoEncontradoException {
+    public Horario atualizarHorario(Horario entity) throws HorarioNaoEncontradoException {
         cadastroHorario.atualizarHorario(entity);
+        return entity;
     }
 
     public void excluirHorario(Long id) throws HorarioNaoEncontradoException {
@@ -97,15 +98,16 @@ public class Fachada {
     public boolean temConflito(Horario horarioNovo, Estudante estudante) {
         return cadastroHorario.temConflito(horarioNovo, estudante);
     }
-    //VInculo
-
+    //Vinculo
+    //preciso criar os metodos de listar
 
     public Vinculo cadastrarVinculo(Estudante estudante, Vinculo vinculo) {
         return cadastroVinculo.cadastrarVinculo(estudante, vinculo);
     }
 
-    public void atualizarVinculo(Vinculo vinculo) {
+    public Vinculo atualizarVinculo(Vinculo vinculo) {
         cadastroVinculo.atualizarVinculo(vinculo);
+        return vinculo;
     }
 
     public boolean verificarExistenciaVinculo(Estudante estudante, TipoVinculo tipoVinculo, String dataInicio, String dataFim) {
@@ -220,7 +222,6 @@ public class Fachada {
 
     public Participacao cadastrarParticipacao(Participacao participacao) throws ParticipacaoDuplicadaException {
         return cadastroParticipacao.cadastrarParticipacao(participacao);
-    }
 
     public void removerParticipacao(Participacao participacao) throws ParticipacaoNaoEncontradaException {
         cadastroParticipacao.removerParticipacao(participacao);

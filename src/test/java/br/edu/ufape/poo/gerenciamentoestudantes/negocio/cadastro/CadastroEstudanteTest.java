@@ -2,6 +2,7 @@ package br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro;
 
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Estudante;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro.exception.UsuarioDuplicadoException;
+import br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro.exception.UsuarioNaoExisteException;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,20 +30,72 @@ public class CadastroEstudanteTest {
 
     }
     @Test
-    @Disabled("Teste Criado para dar erro!")
-    void cadastroEstudanteDuplicado(){
-        //Teste 2 - inventando moda
-        // Criar um estudante para cadastro
-        Estudante estudante = new Estudante(/* Parâmetros do construtor */);
+    public void testSalvarEstudante() throws UsuarioDuplicadoException {
+        Estudante estudante = new Estudante(true, "carlos", "asdfasdf4563456asdfasf", "5544552");
+        Estudante savedEstudante = cadastroEstudante.salvarEstudante(estudante);
 
-        // Executar o cadastro do estudante
-        assertDoesNotThrow(() -> {
-            cadastroEstudante.salvarEstudante(estudante);
-        }, "Erro ao cadastrar estudante");
+        assertNotNull(savedEstudante.getId());
+    }
 
-        // Tentar cadastrar o mesmo estudante novamente (deve lançar a exceção UsuarioDuplicadoException)
+    @Test
+    public void testSalvarEstudanteDuplicado() throws UsuarioDuplicadoException {
+        Estudante estudante = new Estudante(false, "victor", "asd3242fasdf5634563asdfasf", "5544552");
+        cadastroEstudante.salvarEstudante(estudante);
+
         assertThrows(UsuarioDuplicadoException.class, () -> {
             cadastroEstudante.salvarEstudante(estudante);
-        }, "Usuário duplicado não lançou exceção como esperado");
+        });
+    }
+
+    @Test
+    public void testConsultarEstudantePorId() throws UsuarioDuplicadoException {
+        Estudante estudante = new Estudante(true, "joao", "asdf2326asdfasdfasf", "5544552");
+        Estudante savedEstudante = cadastroEstudante.salvarEstudante(estudante);
+
+        Estudante foundEstudante = cadastroEstudante.consultarEstudantePorId(savedEstudante.getId());
+        assertNotNull(foundEstudante);
+        assertEquals(savedEstudante.getId(), foundEstudante.getId());
+    }
+
+    @Test
+    public void testConsultarEstudantePorNome() throws UsuarioDuplicadoException, UsuarioNaoExisteException {
+        Estudante estudante = new Estudante(true, "jean", "as1231212dfasdfa65165sdfasf", "5544552");
+        cadastroEstudante.salvarEstudante(estudante);
+
+        Estudante foundEstudante = cadastroEstudante.consultarEstudantePorNome("jose");
+        assertNotNull(foundEstudante);
+        assertEquals("jose", foundEstudante.getNome());
+    }
+
+    @Test
+    public void testConsultarEstudantePorEmail() throws UsuarioNaoExisteException, UsuarioDuplicadoException {
+        Estudante estudante = new Estudante(true, "jean", "as123121251515dfasdewefasdfasf", "5544552");
+        cadastroEstudante.salvarEstudante(estudante);
+
+        Estudante foundEstudante = cadastroEstudante.consultarEstudantePorEmail("as123121251515dfasdewefasdfasf");
+        assertNotNull(foundEstudante);
+        assertEquals("as123121251515dfasdewefasdfasf", foundEstudante.getEmail());
+    }
+
+    @Test
+    public void testConsultarEstudantePorMatricula() throws UsuarioDuplicadoException, UsuarioNaoExisteException {
+        Estudante estudante = new Estudante(true, "kmkm", "as123dfasdewef0122asdfasf", "554455211");
+        cadastroEstudante.salvarEstudante(estudante);
+
+        Estudante foundEstudante = cadastroEstudante.consultarEstudantePorMatricula("554455211");
+        assertNotNull(foundEstudante);
+        assertEquals("554455211", foundEstudante.getMatricula());
+    }
+
+    @Test
+    public void testRemoverUsuarioEmail() throws UsuarioNaoExisteException, UsuarioDuplicadoException {
+        Estudante estudante = new Estudante(true, "jean", "as123dfas324dewefasdfasf", "5544552");
+        Estudante savedEstudante = cadastroEstudante.salvarEstudante(estudante);
+
+        cadastroEstudante.removerUsuarioEmail(savedEstudante.getEmail());
+
+        assertThrows(UsuarioNaoExisteException.class, () -> {
+            cadastroEstudante.consultarEstudantePorEmail(savedEstudante.getEmail());
+        });
     }
 }
