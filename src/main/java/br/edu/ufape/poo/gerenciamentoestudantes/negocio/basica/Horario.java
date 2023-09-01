@@ -13,20 +13,19 @@ public class Horario {
     @JoinColumn(name = "estudante")
     private Estudante estudante;
     @OneToOne
-    @JoinColumn(name = "registroAtividade")
     private RegistroAtividade registro;
     private ModalidadeAtividade modalidade;
-    private DiaSemana dia;
+    private DiaSemana diaSemana;
     private String horaInicio;
     private String horaFim;
 
     public Horario() {
     }
 
-    public Horario(ModalidadeAtividade modalidade, DiaSemana dia, String horaInicio, String horaFim) {
+    public Horario(ModalidadeAtividade modalidade, DiaSemana diaSemana, String horaInicio, String horaFim) {
         super();
         this.modalidade = modalidade;
-        this.dia = dia;
+        this.diaSemana = diaSemana;
         this.horaInicio = horaInicio;
         this.horaFim = horaFim;
     }
@@ -53,6 +52,7 @@ public class Horario {
 
     public void setRegistro(RegistroAtividade registro) {
         this.registro = registro;
+        registro.setHorario(this);
     }
 
     public ModalidadeAtividade getModalidade() {
@@ -64,11 +64,11 @@ public class Horario {
     }
 
     public DiaSemana getDiaSemana() {
-        return dia;
+        return diaSemana;
     }
 
     public void setDiaSemana(DiaSemana dia) {
-        this.dia = dia;
+        this.diaSemana = dia;
     }
 
     public String getHoraInicio() {

@@ -1,7 +1,11 @@
 package br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro;
 
+import br.edu.ufape.poo.gerenciamentoestudantes.dados.InterfaceColecaoHorario;
 import br.edu.ufape.poo.gerenciamentoestudantes.dados.InterfaceColecaoRegistro;
+import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Documento;
+import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Horario;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.RegistroAtividade;
+import br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro.exception.HorarioDuplicadoException;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro.exception.RegistroAtividadeDuplicadoException;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro.exception.RegistroAtividadeNaoEncontradoException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,18 +18,26 @@ import java.util.Optional;
 public class CadastroAtividade implements InterfaceCadastrarRegistroAtividades {
     @Autowired
     private InterfaceColecaoRegistro colecaoRegistroAtividade;
+    @Autowired
+    private InterfaceColecaoHorario colecaoHorario;
+
 
     @Override
     public RegistroAtividade salvarRegistroAtividade(RegistroAtividade registroAtividade) {
-        if(registroAtividade.getEstudante() != null ){
+        if (registroAtividade.getEstudante() != null) {
             if (verificarExistenciaRegistroAtividadeDuplicado(registroAtividade)) {
                 throw new RegistroAtividadeDuplicadoException("Registro de atividade já cadastrado");
             }
         }
 
+        if (registroAtividade.getHorario() != null) {
+            Horario horario = registroAtividade.getHorario();
+            colecaoHorario.save(horario);
+        }
+
+
         return colecaoRegistroAtividade.save(registroAtividade);
     }
-
     @Override
     public RegistroAtividade buscarRegistroAtividadePorId(long id) {
         return colecaoRegistroAtividade.findById(id)
@@ -39,29 +51,25 @@ public class CadastroAtividade implements InterfaceCadastrarRegistroAtividades {
 
     @Override
     public RegistroAtividade atualizarRegistroAtividade(RegistroAtividade registroAtividade) throws RegistroAtividadeNaoEncontradoException, RegistroAtividadeDuplicadoException {
-        // Verificar se o registro de atividade existe
-        Optional<RegistroAtividade> registroExistente = colecaoRegistroAtividade.findById(registroAtividade.getId());
-
-        if (!registroExistente.isPresent()) {
-            throw new RegistroAtividadeNaoEncontradoException(registroAtividade.getId());
+        RegistroAtividade registroExistente = buscarRegistroAtividadePorId(registroAtividade.getId());
+        if (registroAtividade.getHorario() != null) {
+            registroExistente.setHorario(registroAtividade.getHorario());
         }
-        // Verificar se existe um registro de atividade duplicado com a mesma data
-        if (verificarExistenciaRegistroAtividadeDuplicado(registroAtividade)) {
-            throw new RegistroAtividadeDuplicadoException("Já existe um registro de atividade com a mesma data");
+        if (registroAtividade.getDescricao() != null) {
+            registroExistente.setDescricao(registroAtividade.getDescricao());
         }
-        // Atualizar os dados do registro de atividade existente
-        RegistroAtividade registroAtualizado = registroExistente.get();
-        registroAtualizado.setDescricao(registroAtividade.getDescricao());
-        registroAtualizado.setHorario(registroAtividade.getHorario());
+        if (registroAtividade.getEstudante() != null) {
+            registroExistente.setEstudante(registroAtividade.getEstudante());
+        }
 
-        return colecaoRegistroAtividade.save(registroAtualizado);
+        return colecaoRegistroAtividade.save(registroExistente);
     }
 
     @Override
     public void excluirRegistroAtividade(long id) throws RegistroAtividadeNaoEncontradoException {
         Optional<RegistroAtividade> registroExistente = colecaoRegistroAtividade.findById(id);
 
-        if (!registroExistente.isPresent()) {
+        if (registroExistente.isEmpty()) {
             throw new RegistroAtividadeNaoEncontradoException(id);
         }
 

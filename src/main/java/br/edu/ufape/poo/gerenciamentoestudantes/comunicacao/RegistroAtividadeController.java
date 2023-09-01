@@ -1,6 +1,7 @@
 package br.edu.ufape.poo.gerenciamentoestudantes.comunicacao;
 
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.RegistroAtividade;
+import br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro.exception.HorarioDuplicadoException;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro.exception.RegistroAtividadeDuplicadoException;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro.exception.RegistroAtividadeNaoEncontradoException;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.fachada.Fachada;
@@ -16,18 +17,20 @@ public class RegistroAtividadeController {
     public Fachada fachada;
     @GetMapping("/resgistroAtividade")
     public List<RegistroAtividade> listarRegistrosAtividades(){
+
         return fachada.buscarTodosRegistrosAtividade();
     }
-    @GetMapping("/resgistroAtividade/id")
-    public RegistroAtividade buscarRegistroAtividadePorId(long id){
+    @GetMapping("/resgistroAtividade/{id}")
+    public RegistroAtividade buscarRegistroAtividadePorId(@PathVariable long id){
         return fachada.buscarRegistroAtividadePorId(id);
     }
     @PostMapping("/resgistroAtividade")
-    public RegistroAtividade salvarRegistroAtividade(RegistroAtividade registroAtividade) throws RegistroAtividadeDuplicadoException {
+    public RegistroAtividade salvarRegistroAtividade(@RequestBody RegistroAtividade registroAtividade) throws RegistroAtividadeDuplicadoException, HorarioDuplicadoException {
         return fachada.cadastrarRegistroAtividade(registroAtividade);
     }
     @PatchMapping("/registroAtividade/{id}")
     public RegistroAtividade atualizarRegistro(@PathVariable long id, @RequestBody RegistroAtividade registroAtividade) throws RegistroAtividadeDuplicadoException, RegistroAtividadeNaoEncontradoException {
+        registroAtividade.setId(id);
         return fachada.atualizarRegistroAtividade(registroAtividade);
     }
     @DeleteMapping("/registroAtividade/{id}")

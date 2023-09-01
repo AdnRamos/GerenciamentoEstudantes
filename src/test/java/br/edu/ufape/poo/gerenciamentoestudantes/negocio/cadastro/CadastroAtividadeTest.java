@@ -2,6 +2,7 @@ package br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro;
 
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Estudante;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.RegistroAtividade;
+import br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro.exception.HorarioDuplicadoException;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro.exception.RegistroAtividadeDuplicadoException;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro.exception.UsuarioDuplicadoException;
 import org.junit.jupiter.api.Test;
@@ -20,7 +21,7 @@ public class CadastroAtividadeTest {
     private CadastroEstudante cadastroEstudante;
 
     @Test
-    public void salvarRegistroAtividadeTeste() throws RegistroAtividadeDuplicadoException {
+    public void salvarRegistroAtividadeTeste() throws RegistroAtividadeDuplicadoException, HorarioDuplicadoException {
         // Criar um registro de atividade para teste
         RegistroAtividade registroAtividade = new RegistroAtividade();
         registroAtividade.setDescricao("Atividade de qwerqwevavadvXdzdxf");
@@ -38,7 +39,7 @@ public class CadastroAtividadeTest {
         assertEquals(resultado.getId(), registroCadastrado.getId());
     }
     @Test
-    public void cadastrarRegistroAtividadeDuplicadoTeste() throws RegistroAtividadeDuplicadoException, UsuarioDuplicadoException {
+    public void cadastrarRegistroAtividadeDuplicadoTeste() throws RegistroAtividadeDuplicadoException, UsuarioDuplicadoException, HorarioDuplicadoException {
         // Criar um registro de atividade para teste
         RegistroAtividade atividadeDuplicada = new RegistroAtividade("O que ta acontecendo aqui");
         Estudante estudante = new Estudante();
@@ -54,7 +55,7 @@ public class CadastroAtividadeTest {
     }
     //Teste de Integração
     @Test
-    public void CadastroRegistroAtividadeComEstudanteTeste() throws UsuarioDuplicadoException {
+    public void CadastroRegistroAtividadeComEstudanteTeste() throws UsuarioDuplicadoException, HorarioDuplicadoException {
         //criando estudante
         Estudante estudante = new Estudante("werqwerqwerqw");
         estudante.setEmail("dfjapsdfpadsfpasm");

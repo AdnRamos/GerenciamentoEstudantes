@@ -17,11 +17,11 @@ public class ParticipacaoController {
     @Autowired
     public Fachada fachada;
 
-    @GetMapping("/participacao")
+    @GetMapping("/participacao/estudantes")
     public List<Participacao> listarParticipacaoEstudante(@RequestBody Estudante estudante){
         return fachada.listarParticipacoesPorEstudante(estudante);
     }
-    @GetMapping("/participacao")
+    @GetMapping("/participacao/projetos")
     public List<Participacao> listarParticipacaoProjeto(@RequestBody Projeto projeto){
         return fachada.listarParticipacoesPorProjeto(projeto);
     }

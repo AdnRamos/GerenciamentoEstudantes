@@ -115,7 +115,7 @@ public class Fachada {
 
     //Registro de Atividades
 
-    public RegistroAtividade cadastrarRegistroAtividade(RegistroAtividade registroAtividade) {
+    public RegistroAtividade cadastrarRegistroAtividade(RegistroAtividade registroAtividade) throws HorarioDuplicadoException {
         return cadastrarRegistroAtividades.salvarRegistroAtividade(registroAtividade);
     }
 

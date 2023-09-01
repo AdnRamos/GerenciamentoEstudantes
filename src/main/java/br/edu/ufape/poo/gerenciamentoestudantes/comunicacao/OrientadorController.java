@@ -23,30 +23,30 @@ public class OrientadorController {
     @Autowired
     public Fachada fachada;
 
-    @GetMapping("/horario")
+    @GetMapping("/orientador")
     public List<Orientador> listarOrientador() {
         return fachada.listarOrientadores();
     }
 
-    @PostMapping("/horario")
+    @PostMapping("/orientador")
     public Orientador cadastrarOrientador(@RequestBody Orientador orientador)
             throws UsuarioDuplicadoException {
         return fachada.salvarOrientador(orientador);
     }
 
-    @GetMapping("/horario/{email}")
+    @GetMapping("/orientador/email/{email}")
     public Orientador exibirOrientadorEmail(@PathVariable String email) throws UsuarioNaoExisteException {
         return fachada.consultarOrientadorPorEmail(email);
     }
 
 
-    @PatchMapping("/horario/{id}")
+    @PatchMapping("/orientador/{id}")
     public Orientador atualizarDados(@PathVariable long id, @RequestBody Orientador orientador) throws UsuarioDuplicadoException {
         orientador.setId(id);
         return fachada.salvarOrientador(orientador);
     }
 
-    @DeleteMapping("/horario/{email}")
+    @DeleteMapping("/orientador/{email}")
     public String apagarOrientador(@PathVariable String email)
             throws UsuarioNaoExisteException {
 
