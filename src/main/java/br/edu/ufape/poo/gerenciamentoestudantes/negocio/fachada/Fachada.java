@@ -155,7 +155,7 @@ public class Fachada {
     public void deletarDocumento(long id) {
         cadastroDocumento.deletarDocumento(id);
     }
-    //Funcao
+    //Funca
 
 
     public Funcao cadastrarFuncao(Estudante estudante, Funcao funcao) throws FuncaoDuplicadaException {
