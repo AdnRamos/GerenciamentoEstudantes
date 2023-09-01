@@ -225,7 +225,7 @@ public class Fachada {
 
     public Participacao cadastrarParticipacao(Participacao participacao) throws ParticipacaoDuplicadaException {
         return cadastroParticipacao.cadastrarParticipacao(participacao);
-
+    }
     public void removerParticipacao(Participacao participacao) throws ParticipacaoNaoEncontradaException {
         cadastroParticipacao.removerParticipacao(participacao);
     }
