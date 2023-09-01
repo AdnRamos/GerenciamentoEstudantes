@@ -24,6 +24,10 @@ public class CadastroDocumento implements InterfaceCadastroDocumento {
             throw new DocumentoInvalidoException("Falha ao cadastrar o documento", e);
         }
     }
+    @Override
+    public List<Documento> listarDocumentos() {
+        return colecaoDocumento.findAll();
+    }
 
     @Override
     public Documento buscarDocumentoPorId(long id) {
@@ -32,14 +36,20 @@ public class CadastroDocumento implements InterfaceCadastroDocumento {
     }
 
     @Override
-    public Documento atualizarDocumento(Documento documento) {
-        verificarDocumentoExistente(documento.getId());
-        try {
-            return colecaoDocumento.save(documento);
-        } catch (Exception e) {
-            throw new DocumentoNaoAtualizadoException(documento.getId());
+    public Documento atualizarDocumento(Documento documentoAtualizado) {
+        Documento documentoExistente = buscarDocumentoPorId(documentoAtualizado.getId());
+        if (documentoAtualizado.getNome() != null) {
+            documentoExistente.setNome(documentoAtualizado.getNome());
         }
+        if (documentoAtualizado.getDescricao() != null) {
+            documentoExistente.setDescricao(documentoAtualizado.getDescricao());
+        }
+        if (documentoAtualizado.getLink() != null) {
+            documentoExistente.setLink(documentoAtualizado.getLink());
+        }
+        return colecaoDocumento.save(documentoExistente);
     }
+
 
     @Override
     public void deletarDocumento(long id) {

@@ -11,6 +11,7 @@ public interface InterfaceCadastroEstudante {
     //Crud
     List<Estudante> listarEstudantes();
     Estudante salvarEstudante(Estudante entity) throws UsuarioDuplicadoException;
+    Estudante atualizarEstudante(Estudante estudanteAtualizado);
     void removerUsuarioEmail(String email) throws UsuarioNaoExisteException;
 
     //Verificar existência:

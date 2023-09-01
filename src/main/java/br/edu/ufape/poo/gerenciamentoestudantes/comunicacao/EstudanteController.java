@@ -27,29 +27,24 @@ public class EstudanteController {
     public List<Estudante> listarEstudante() {
         return fachada.listarEstudantes();
     }
-
     @PostMapping("/estudante")
     public Estudante cadastrarEstudante(@RequestBody Estudante e)
             throws UsuarioDuplicadoException {
         return fachada.salvarEstudante(e);
     }
-
     @GetMapping("/estudante/{id}")
     public Estudante exibirEstudanteId(@PathVariable long id) {
         return fachada.procurarEstudanteId(id);
     }
-    @GetMapping("/estudante/{email}")
+    @GetMapping("/estudante/email/{email}")
     public Estudante exibirEstudanteEmail(@PathVariable String email) throws UsuarioNaoExisteException {
         return fachada.consultarEstudanteEmail(email);
     }
-
-
     @PatchMapping("/estudante/{id}")
     public Estudante atualizarDados(@PathVariable long id, @RequestBody Estudante e) throws UsuarioDuplicadoException {
         e.setId(id);
-        return fachada.salvarEstudante(e);
+        return fachada.atualizarEstudante(e);
     }
-
     @DeleteMapping("/estudante/{email}")
     public String apagarEstudante(@PathVariable String email)
             throws UsuarioNaoExisteException {

@@ -43,13 +43,12 @@ public class Fachada {
     public List<Estudante> listarEstudantes() {
         return cadastroEstudante.listarEstudantes();
     }
-    public boolean verificarExistenciaEstudanteId(Long id) {
-        return cadastroEstudante.verificarExistenciaEstudanteId(id);
-    }
     public Estudante salvarEstudante(Estudante entity) throws UsuarioDuplicadoException {
         return cadastroEstudante.salvarEstudante(entity);
     }
-
+    public Estudante atualizarEstudante(Estudante estudanteAtualizado){
+        return cadastroEstudante.atualizarEstudante(estudanteAtualizado);
+    };
     public void removerUsuarioEmail(String email) throws UsuarioNaoExisteException {
         cadastroEstudante.removerUsuarioEmail(email);
     }
@@ -143,6 +142,10 @@ public class Fachada {
 
     public Documento buscarDocumentoPorId(long id) {
         return cadastroDocumento.buscarDocumentoPorId(id);
+    }
+
+    public List<Documento> listarDocumentos() {
+        return cadastroDocumento.listarDocumentos();
     }
 
     public Documento atualizarDocumento(Documento documento) {

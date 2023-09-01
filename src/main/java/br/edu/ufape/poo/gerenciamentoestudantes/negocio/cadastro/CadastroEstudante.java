@@ -29,6 +29,54 @@ public class CadastroEstudante implements InterfaceCadastroEstudante {
             return colecaoEstudante.save(entity);
         }
     }
+    @Override
+    public Estudante atualizarEstudante(Estudante estudanteAtualizado){
+        Estudante estudanteExistente = consultarEstudantePorId(estudanteAtualizado.getId());
+
+        // Atualizar apenas os campos fornecidos
+        if (estudanteAtualizado.getNome() != null) {
+            estudanteExistente.setNome(estudanteAtualizado.getNome());
+        }
+        if (estudanteAtualizado.getEmail() != null) {
+            estudanteExistente.setEmail(estudanteAtualizado.getEmail());
+        }
+        if (estudanteAtualizado.getCurso() != null) {
+            estudanteExistente.setCurso(estudanteAtualizado.getCurso());
+        }
+        if (estudanteAtualizado.getCelular() != null) {
+            estudanteExistente.setCelular(estudanteAtualizado.getCelular());
+        }
+        if (estudanteAtualizado.getNumeroRg() != null) {
+            estudanteExistente.setNumeroRg(estudanteAtualizado.getNumeroRg());
+        }
+        if (estudanteAtualizado.getOrgaoExpedidor() != null) {
+            estudanteExistente.setOrgaoExpedidor(estudanteAtualizado.getOrgaoExpedidor());
+        }
+        if (estudanteAtualizado.getDataEmissao() != null) {
+            estudanteExistente.setDataEmissao(estudanteAtualizado.getDataEmissao());
+        }
+        if (estudanteAtualizado.getCpf() != null) {
+            estudanteExistente.setCpf(estudanteAtualizado.getCpf());
+        }
+        if (estudanteAtualizado.getEstadoCivil() != null) {
+            estudanteExistente.setEstadoCivil(estudanteAtualizado.getEstadoCivil());
+        }
+        if (estudanteAtualizado.getNacionalidade() != null) {
+            estudanteExistente.setNacionalidade(estudanteAtualizado.getNacionalidade());
+        }
+        if (estudanteAtualizado.getNaturalidade() != null) {
+            estudanteExistente.setNaturalidade(estudanteAtualizado.getNaturalidade());
+        }
+        if (estudanteAtualizado.getMatricula() != null) {
+            estudanteExistente.setMatricula(estudanteAtualizado.getMatricula());
+        }
+        // Continue para outros campos que podem ser atualizados
+
+        // Salvar o estudante atualizado no repositório
+        return colecaoEstudante.save(estudanteExistente);
+
+
+    }
 
     @Override
     public void removerUsuarioEmail(String email) throws UsuarioNaoExisteException {
@@ -66,6 +114,7 @@ public class CadastroEstudante implements InterfaceCadastroEstudante {
         }
         return e;
     }
+
 
     //Verificar existencia
     @Override
