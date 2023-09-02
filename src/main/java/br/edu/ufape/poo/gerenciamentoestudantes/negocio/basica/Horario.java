@@ -2,6 +2,8 @@ package br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica;
 
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Enums.DiaSemana;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Enums.ModalidadeAtividade;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -9,10 +11,11 @@ public class Horario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "estudante")
     private Estudante estudante;
-    @OneToOne
+
+    @OneToOne(fetch = FetchType.LAZY)
     private RegistroAtividade registro;
     private ModalidadeAtividade modalidade;
     private DiaSemana diaSemana;

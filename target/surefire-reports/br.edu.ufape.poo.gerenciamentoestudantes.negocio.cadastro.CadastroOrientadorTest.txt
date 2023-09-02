@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro.CadastroOrientadorTest
+-------------------------------------------------------------------------------
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.337 s - in br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro.CadastroOrientadorTest

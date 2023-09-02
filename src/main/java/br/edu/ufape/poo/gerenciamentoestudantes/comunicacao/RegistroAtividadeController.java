@@ -16,7 +16,7 @@ public class RegistroAtividadeController {
     @Autowired
     public Fachada fachada;
     @GetMapping("/resgistroAtividade")
-    public List<RegistroAtividade> listarRegistrosAtividades(){
+    public @ResponseBody List<RegistroAtividade> listarRegistrosAtividades(){
 
         return fachada.buscarTodosRegistrosAtividade();
     }

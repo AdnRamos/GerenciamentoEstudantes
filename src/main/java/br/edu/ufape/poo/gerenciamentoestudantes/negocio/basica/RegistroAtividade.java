@@ -1,22 +1,27 @@
 package br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 
-@Data
+
 @Entity
 @Table(name = "registroAtividade")
-@EqualsAndHashCode(exclude = "estudante")
 public class RegistroAtividade {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    @ManyToOne
-    @JoinColumn(name = "estudante")
+    private Long id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "estudante_id")
+    @JsonIgnoreProperties("registros")
     private Estudante estudante;
-    @OneToOne
+
+    @OneToOne(fetch = FetchType.LAZY)
     private Horario horario;
+
     private String descricao;
 
     public RegistroAtividade() {

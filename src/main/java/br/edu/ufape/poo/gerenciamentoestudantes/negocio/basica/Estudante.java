@@ -1,6 +1,8 @@
 package br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -8,61 +10,50 @@ import java.util.List;
 
 @Entity
 @Table(name = "estudante")
-@PrimaryKeyJoinColumn
-@JsonIgnoreProperties("registros")
 public class Estudante extends Usuario {
 
-    //Duvidaa: é nescessario criar um id para as classes que herdam usuario?
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String matricula;
-    @OneToMany(mappedBy = "estudante", cascade = CascadeType.ALL)
-    private List<Horario> horarios;
-    @OneToMany(mappedBy = "estudante", fetch = FetchType.LAZY)
-    private List<RegistroAtividade> registros;
-    @OneToMany(mappedBy = "estudante", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Vinculo> vinculos;
-    @OneToMany(mappedBy = "estudante", cascade = CascadeType.ALL)
-    private List<Funcao> funcoes;
-    @OneToMany(mappedBy = "estudante", cascade = CascadeType.ALL)
-    private List<Participacao> participacoes;
-    @ManyToOne
-    private Orientador orientador;
-    @OneToMany(mappedBy = "estudante", cascade = CascadeType.ALL)
-    private List<Inscricao> inscricoes;
 
+    private String matricula;
+
+    @OneToMany(mappedBy = "estudante", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Horario> horarios = new ArrayList<>();
+
+    @OneToMany(mappedBy = "estudante", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private List<RegistroAtividade> registros = new ArrayList<>();
+
+    @OneToMany(mappedBy = "estudante", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Vinculo> vinculos = new ArrayList<>();
+
+    @OneToMany(mappedBy = "estudante", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Funcao> funcoes = new ArrayList<>();
+
+    @OneToMany(mappedBy = "estudante", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Participacao> participacoes = new ArrayList<>();
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Orientador orientador;
+
+    @OneToMany(mappedBy = "estudante", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Inscricao> inscricoes = new ArrayList<>();
 
     public Estudante(boolean gestao, String nome, String email, String curso, String celular, String numeroRg, String orgaoExpedidor, String dataEmissao, String cpf, String estadoCivil, String nacionalidade, String naturalidade, String matricula) {
         super(gestao, nome, email, curso, celular, numeroRg, orgaoExpedidor, dataEmissao, cpf, estadoCivil, nacionalidade, naturalidade);
         this.matricula = matricula;
-        this.horarios = new ArrayList<>();
-        this.registros = new ArrayList<>();
-        this.vinculos = new ArrayList<>();
-        this.funcoes = new ArrayList<>();
-        this.participacoes = new ArrayList<>();
-        this.inscricoes = new ArrayList<>();
     }
 
     public Estudante(boolean gestao, String nome, String email, String matricula) {
         super(gestao, nome, email);
         this.matricula = matricula;
-        this.horarios = new ArrayList<>();
-        this.registros = new ArrayList<>();
-        this.vinculos = new ArrayList<>();
-        this.funcoes = new ArrayList<>();
-        this.participacoes = new ArrayList<>();
-        this.inscricoes = new ArrayList<>();
+
     }
 
     public Estudante(String matricula) {
         this.matricula = matricula;
-        this.horarios = new ArrayList<>();
-        this.registros = new ArrayList<>();
-        this.vinculos = new ArrayList<>();
-        this.funcoes = new ArrayList<>();
-        this.participacoes = new ArrayList<>();
-        this.inscricoes = new ArrayList<>();
+
     }
     public Estudante() {
 

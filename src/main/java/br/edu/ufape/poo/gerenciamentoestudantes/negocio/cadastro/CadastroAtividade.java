@@ -1,8 +1,10 @@
 package br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro;
 
+import br.edu.ufape.poo.gerenciamentoestudantes.dados.InterfaceColecaoEstudante;
 import br.edu.ufape.poo.gerenciamentoestudantes.dados.InterfaceColecaoHorario;
 import br.edu.ufape.poo.gerenciamentoestudantes.dados.InterfaceColecaoRegistro;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Documento;
+import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Estudante;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Horario;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.RegistroAtividade;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro.exception.HorarioDuplicadoException;
@@ -20,24 +22,40 @@ public class CadastroAtividade implements InterfaceCadastrarRegistroAtividades {
     private InterfaceColecaoRegistro colecaoRegistroAtividade;
     @Autowired
     private InterfaceColecaoHorario colecaoHorario;
+    @Autowired
+    private InterfaceColecaoEstudante colecaoEstudante;
 
 
     @Override
     public RegistroAtividade salvarRegistroAtividade(RegistroAtividade registroAtividade) {
         if (registroAtividade.getEstudante() != null) {
-            if (verificarExistenciaRegistroAtividadeDuplicado(registroAtividade)) {
-                throw new RegistroAtividadeDuplicadoException("Registro de atividade já cadastrado");
+            Estudante estudante = registroAtividade.getEstudante();
+
+            if (estudante.getId() == 0) {
+                // O estudante ainda não está persistido, então salve-o
+                estudante = colecaoEstudante.save(estudante);
+            } else {
+                // O estudante já existe, então apenas adicione o registro
+                estudante.addRegistro(registroAtividade);
             }
+            // Atualize o estudante no banco de dados, se necessário
+            colecaoEstudante.save(estudante);
         }
 
         if (registroAtividade.getHorario() != null) {
             Horario horario = registroAtividade.getHorario();
-            colecaoHorario.save(horario);
-        }
 
+            if (horario.getId() == 0) {
+                // O horario ainda não está persistido, então salve-o
+                colecaoHorario.save(horario);
+            }
+        }
 
         return colecaoRegistroAtividade.save(registroAtividade);
     }
+
+
+
     @Override
     public RegistroAtividade buscarRegistroAtividadePorId(long id) {
         return colecaoRegistroAtividade.findById(id)

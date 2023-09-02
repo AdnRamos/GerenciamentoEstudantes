@@ -50,7 +50,7 @@ public class EstudanteController {
             throws UsuarioNaoExisteException {
 
         fachada.removerUsuarioEmail(email);
-        return "ok";
+        return "Estudante removido com sucesso.";
     }
 
 }
