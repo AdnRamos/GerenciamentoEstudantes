@@ -12,9 +12,7 @@ public class Vinculo {
     @ManyToOne
     private Estudante estudante;
     private boolean ativo;
-
     private TipoVinculo tipoVinculo;
-
     private String qtdHorasSemanais;
     private String dataInicio;
     private String dataFim;

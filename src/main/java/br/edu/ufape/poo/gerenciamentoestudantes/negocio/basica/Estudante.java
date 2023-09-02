@@ -1,5 +1,6 @@
 package br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import java.util.List;
 @Entity
 @Table(name = "estudante")
 @PrimaryKeyJoinColumn
+@JsonIgnoreProperties("registros")
 public class Estudante extends Usuario {
 
     //Duvidaa: é nescessario criar um id para as classes que herdam usuario?
@@ -17,7 +19,7 @@ public class Estudante extends Usuario {
     private String matricula;
     @OneToMany(mappedBy = "estudante", cascade = CascadeType.ALL)
     private List<Horario> horarios;
-    @OneToMany(mappedBy = "estudante", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "estudante", fetch = FetchType.LAZY)
     private List<RegistroAtividade> registros;
     @OneToMany(mappedBy = "estudante", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Vinculo> vinculos;
@@ -94,7 +96,6 @@ public class Estudante extends Usuario {
     }
     public void addHorario(Horario horario){
         this.horarios.add(horario);
-        horario.setEstudante(this);
     }
 
     public List<RegistroAtividade> getRegistros() {
@@ -106,7 +107,6 @@ public class Estudante extends Usuario {
     }
     public void addRegistro(RegistroAtividade registro){
         this.registros.add(registro);
-        registro.setEstudante(this);
     }
 
     public List<Vinculo> getVinculos() {
@@ -118,7 +118,6 @@ public class Estudante extends Usuario {
     }
     public void addVinculo(Vinculo vinculo){
         this.vinculos.add(vinculo);
-        vinculo.setEstudante(this);
     }
 
     public List<Funcao> getFuncoes() {
@@ -130,7 +129,6 @@ public class Estudante extends Usuario {
     }
     public void addFuncao(Funcao funcao){
         this.funcoes.add(funcao);
-        funcao.setEstudante(this);
     }
 
     public List<Participacao> getParticipacoes() {
@@ -142,7 +140,6 @@ public class Estudante extends Usuario {
     }
     public void addParticipacao(Participacao participacao){
         this.setParticipacoes(participacoes);
-        participacao.setEstudante(this);
     }
 
     public Orientador getOrientador() {
@@ -162,7 +159,6 @@ public class Estudante extends Usuario {
     }
     public void addInscricao(Inscricao inscricao){
         this.inscricoes.add(inscricao);
-        inscricao.setEstudante(this);
     }
 
 }

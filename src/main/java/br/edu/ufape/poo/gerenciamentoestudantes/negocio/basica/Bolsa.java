@@ -76,6 +76,5 @@ public class Bolsa {
     }
     public void addInscricao(Inscricao inscricao){
         this.inscricoes.add(inscricao);
-        inscricao.setBolsa(this);
     }
 }

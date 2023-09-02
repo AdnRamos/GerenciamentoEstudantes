@@ -25,7 +25,7 @@ public abstract class Usuario {
     private String estadoCivil;
     private String nacionalidade;
     private String naturalidade;
-    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
+    @OneToOne
     private Endereco endereco;
 
     public Usuario(boolean gestao, String nome, String email, String curso, String celular, String numeroRg, String orgaoExpedidor, String dataEmissao, String cpf, String estadoCivil, String nacionalidade, String naturalidade) {
@@ -183,6 +183,5 @@ public abstract class Usuario {
 
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
-        endereco.setUsuario(this);
     }
 }

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class Fachada {
@@ -31,6 +32,8 @@ public class Fachada {
     private InterfaceCadastroInscricao cadastroInscricao;
     @Autowired
     private InterfaceCadastroParticipacao cadastroParticipacao;
+    @Autowired
+    private InterfaceCadastroEndereco cadastroEndereco;
 
 
     //Estudante:
@@ -241,4 +244,23 @@ public class Fachada {
     public List<Participacao> listarParticipacoesPorProjeto(Projeto projeto) {
         return cadastroParticipacao.listarParticipacoesPorProjeto(projeto);
     }
+    // Endereço
+
+    public List<Endereco> listarEnderecos() {
+        return cadastroEndereco.findAll();
+    }
+
+    public <S extends Endereco> S salvarEndereco(S entity) {
+        return cadastroEndereco.save(entity);
+    }
+
+    public Optional<Endereco> buscarEnderecoId(long id) {
+        return cadastroEndereco.findById(id);
+    }
+
+
+    public void apagarEnderecoId(long id) {
+        cadastroEndereco.deleteById(id);
+    }
+
 }

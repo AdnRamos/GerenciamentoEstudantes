@@ -52,7 +52,6 @@ public class Horario {
 
     public void setRegistro(RegistroAtividade registro) {
         this.registro = registro;
-        registro.setHorario(this);
     }
 
     public ModalidadeAtividade getModalidade() {

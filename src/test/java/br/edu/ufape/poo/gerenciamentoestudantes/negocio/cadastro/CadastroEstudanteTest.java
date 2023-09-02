@@ -62,9 +62,9 @@ public class CadastroEstudanteTest {
         Estudante estudante = new Estudante(true, "jean", "as1231212dfasdfa65165sdfasf", "5544552");
         cadastroEstudante.salvarEstudante(estudante);
 
-        Estudante foundEstudante = cadastroEstudante.consultarEstudantePorNome("jose");
+        Estudante foundEstudante = cadastroEstudante.consultarEstudantePorNome("jean");
         assertNotNull(foundEstudante);
-        assertEquals("jose", foundEstudante.getNome());
+        assertEquals("jean", foundEstudante.getNome());
     }
 
     @Test

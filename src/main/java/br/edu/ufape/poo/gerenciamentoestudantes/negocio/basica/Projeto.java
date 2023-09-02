@@ -128,6 +128,5 @@ public class Projeto {
     }
     public void addParcipacoes(Participacao participacao){
         this.setParticipacoes(participacoes);
-        participacao.setProjeto(this);
     }
 }

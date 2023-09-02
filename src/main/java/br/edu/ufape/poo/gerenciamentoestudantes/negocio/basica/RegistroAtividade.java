@@ -1,9 +1,13 @@
 package br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica;
 
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
+@Data
 @Entity
 @Table(name = "registroAtividade")
+@EqualsAndHashCode(exclude = "estudante")
 public class RegistroAtividade {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,7 +49,6 @@ public class RegistroAtividade {
 
     public void setHorario(Horario horario) {
         this.horario = horario;
-        horario.setRegistro(this);
     }
 
     public String getDescricao() {

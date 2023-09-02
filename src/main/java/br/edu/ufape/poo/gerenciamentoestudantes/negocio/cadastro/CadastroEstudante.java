@@ -1,6 +1,8 @@
 package br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro;
 
+import br.edu.ufape.poo.gerenciamentoestudantes.dados.InterfaceColecaoEndereco;
 import br.edu.ufape.poo.gerenciamentoestudantes.dados.InterfaceColecaoEstudante;
+import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Endereco;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Estudante;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro.exception.UsuarioNaoExisteException;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro.exception.UsuarioDuplicadoException;
@@ -13,6 +15,8 @@ import java.util.List;
 public class CadastroEstudante implements InterfaceCadastroEstudante {
     @Autowired
     private InterfaceColecaoEstudante colecaoEstudante;
+    @Autowired
+    private InterfaceColecaoEndereco colecaoEndereco;
 
     //CRUD
     @Override
@@ -21,11 +25,16 @@ public class CadastroEstudante implements InterfaceCadastroEstudante {
     }
 
     @Override
-    public Estudante salvarEstudante(Estudante entity) throws UsuarioDuplicadoException {
+    public Estudante salvarEstudante( Estudante entity) throws UsuarioDuplicadoException {
         try{
             consultarEstudantePorEmail(entity.getEmail());
             throw new UsuarioDuplicadoException(entity.getEmail());
         }catch (UsuarioNaoExisteException err){
+            if(entity.getEndereco() != null){
+                Endereco endereco = entity.getEndereco();
+                colecaoEndereco.save(endereco);
+            }
+
             return colecaoEstudante.save(entity);
         }
     }

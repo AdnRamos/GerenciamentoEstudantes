@@ -9,7 +9,6 @@ public class Endereco {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @OneToOne
-    @JoinColumn(name = "usuario")
     private Usuario usuario;
     private String rua;
     private int numero;
