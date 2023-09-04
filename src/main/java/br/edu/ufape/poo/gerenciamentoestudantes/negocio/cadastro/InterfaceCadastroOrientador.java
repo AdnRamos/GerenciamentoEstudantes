@@ -11,9 +11,10 @@ public interface InterfaceCadastroOrientador {
     List<Orientador> listarOrientadores();
 
     Orientador salvarOrientador(Orientador entity) throws UsuarioDuplicadoException;
+    Orientador atualizarOrientador(Orientador orientadorAtualizado) throws UsuarioNaoExisteException;
 
-    void removerUsuarioEmail(String email) throws UsuarioNaoExisteException;
-
+    void removerOrientadorId(long id) throws UsuarioNaoExisteException;
+    Orientador consultarOrientadorPorId(long id) throws  UsuarioNaoExisteException;
     //Consultar
     Orientador consultarOrientadorPorEmail(String email) throws UsuarioNaoExisteException;
 

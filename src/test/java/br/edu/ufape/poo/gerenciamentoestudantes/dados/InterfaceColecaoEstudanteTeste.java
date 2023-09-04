@@ -38,11 +38,6 @@ public class InterfaceColecaoEstudanteTeste{
         Horario h1 = new Horario(ModalidadeAtividade.PRESENCIAL, DiaSemana.SEGUNDA,"14:00", "17:00");
         Horario h2 = new Horario(ModalidadeAtividade.REMOTO, DiaSemana.QUARTA,"14:00", "17:00");
         //Iniciando o ArrayList
-        horarios = new ArrayList<Horario>();
-        e.setHorarios(horarios);
-        //adicionando os horarios no ArrayList
-        e.addHorario(h1);
-        e.addHorario(h2);
         //Integrando com geristro de atividades
         RegistroAtividade reg = new RegistroAtividade("fiz nada nessa desgraca nao");
         //Iniciando o ArrayList

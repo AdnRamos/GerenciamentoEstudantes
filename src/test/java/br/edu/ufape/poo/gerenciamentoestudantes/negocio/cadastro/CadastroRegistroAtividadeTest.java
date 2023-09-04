@@ -14,9 +14,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
-public class CadastroAtividadeTest {
+public class CadastroRegistroAtividadeTest {
     @Autowired
-    private CadastroAtividade cadastroAtividade;
+    private CadastroRegistroAtividade cadastroRegistroAtividade;
     @Autowired
     private CadastroEstudante cadastroEstudante;
 
@@ -27,14 +27,14 @@ public class CadastroAtividadeTest {
         registroAtividade.setDescricao("Atividade de qwerqwevavadvXdzdxf");
 
         // Cadastrar o registro de atividade
-        RegistroAtividade resultado = cadastroAtividade.salvarRegistroAtividade(registroAtividade);
+        RegistroAtividade resultado = cadastroRegistroAtividade.salvarRegistroAtividade(registroAtividade);
 
         // Verificar se o registro foi cadastrado com sucesso
         assertNotNull(resultado.getId());
         assertEquals("Atividade de qwerqwevavadvXdzdxf", resultado.getDescricao());
 
         // Buscar o registro cadastrado
-        RegistroAtividade registroCadastrado = cadastroAtividade.buscarRegistroAtividadePorId(resultado.getId());
+        RegistroAtividade registroCadastrado = cadastroRegistroAtividade.buscarRegistroAtividadePorId(resultado.getId());
         assertNotNull(registroCadastrado);
         assertEquals(resultado.getId(), registroCadastrado.getId());
     }
@@ -47,10 +47,10 @@ public class CadastroAtividadeTest {
 
         atividadeDuplicada.setEstudante(estudante);
         // Tentar cadastrar o mesmo registro duas vezes deve lançar a exceção RegistroAtividadeDuplicadoException
-        cadastroAtividade.salvarRegistroAtividade(atividadeDuplicada);
+        cadastroRegistroAtividade.salvarRegistroAtividade(atividadeDuplicada);
 
         assertThrows(RegistroAtividadeDuplicadoException.class, () -> {
-            cadastroAtividade.salvarRegistroAtividade(atividadeDuplicada);
+            cadastroRegistroAtividade.salvarRegistroAtividade(atividadeDuplicada);
         });
     }
     //Teste de Integração
@@ -63,7 +63,7 @@ public class CadastroAtividadeTest {
         //criando atividade
         RegistroAtividade registroAtividade = new RegistroAtividade("qwerqwerqwerqwer 1");
         registroAtividade.setEstudante(estudante);
-        cadastroAtividade.salvarRegistroAtividade(registroAtividade);
+        cadastroRegistroAtividade.salvarRegistroAtividade(registroAtividade);
 
         assertNotNull(registroAtividade.getId());//verifica se  atividade foi registrada
         assertEquals(estudante, registroAtividade.getEstudante());//verifica se o estudante foi vinculado a atividade

@@ -24,15 +24,13 @@ public class CadastroFuncaoTest {
     @Test
     public void CadastrarFuncaoTeste() throws UsuarioDuplicadoException {
         Estudante estudante = new Estudante(true, "jose", "aosidjfoaijsdofjasodjfoia", "5544552");
-        cadastroEstudante.salvarEstudante(estudante); // Persiste o estudante
 
         Funcao funcao = new Funcao(TipoFuncao.BACK_END, "01/01/2023");
         funcao.setEstudante(estudante);
 
-        Funcao cadastrada = cadastroFuncao.cadastrarFuncao(estudante, funcao);
+        Funcao cadastrada = cadastroFuncao.cadastrarFuncao(funcao);
 
         assertNotNull(cadastrada);
-        assertNotNull(cadastrada.getId());
         assertEquals(funcao.getTipoFuncao(), cadastrada.getTipoFuncao());
     }
 
@@ -42,9 +40,10 @@ public class CadastroFuncaoTest {
         cadastroEstudante.salvarEstudante(estudante); // Persiste o estudante
 
         Funcao funcao = new Funcao(TipoFuncao.FRONT_END, "01/01/2023");
-        cadastroFuncao.cadastrarFuncao(estudante, funcao);
+        funcao.setEstudante(estudante);
+        cadastroFuncao.cadastrarFuncao(funcao);
 
-        assertThrows(FuncaoDuplicadaException.class, () -> cadastroFuncao.cadastrarFuncao(estudante, funcao));
+        assertThrows(FuncaoDuplicadaException.class, () -> cadastroFuncao.cadastrarFuncao(funcao));
     }
 
     @Test
@@ -53,7 +52,8 @@ public class CadastroFuncaoTest {
         cadastroEstudante.salvarEstudante(estudante); // Persiste o estudante
 
         Funcao funcao = new Funcao(TipoFuncao.FRONT_END, "01/01/2023");
-        Funcao cadastrada = cadastroFuncao.cadastrarFuncao(estudante, funcao);
+        funcao.setEstudante(estudante);
+        Funcao cadastrada = cadastroFuncao.cadastrarFuncao(funcao);
 
         Funcao encontrada = cadastroFuncao.buscarFuncaoPorId(cadastrada.getId());
 

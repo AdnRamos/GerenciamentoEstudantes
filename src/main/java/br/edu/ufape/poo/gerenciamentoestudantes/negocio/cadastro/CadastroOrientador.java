@@ -1,6 +1,7 @@
 package br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro;
 
 import br.edu.ufape.poo.gerenciamentoestudantes.dados.InterfaceColecaoOrientador;
+import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Estudante;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Orientador;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro.exception.UsuarioDuplicadoException;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro.exception.UsuarioNaoExisteException;
@@ -29,11 +30,57 @@ public class CadastroOrientador implements InterfaceCadastroOrientador {
         }
     }
     @Override
-    public void removerUsuarioEmail(String email) throws UsuarioNaoExisteException {
-        Orientador o = consultarOrientadorPorEmail(email);
+    public Orientador atualizarOrientador(Orientador orientadorAtualizado) throws  UsuarioNaoExisteException {
+        Orientador orientadorExistente = consultarOrientadorPorId(orientadorAtualizado.getId());
+
+        // Atualizar apenas os campos fornecidos
+        if (orientadorAtualizado.getNome() != null) {
+            orientadorExistente.setNome(orientadorAtualizado.getNome());
+        }
+        if (orientadorAtualizado.getEmail() != null) {
+            orientadorExistente.setEmail(orientadorAtualizado.getEmail());
+        }
+        if (orientadorAtualizado.getCurso() != null) {
+            orientadorExistente.setCurso(orientadorAtualizado.getCurso());
+        }
+        if (orientadorAtualizado.getCelular() != null) {
+            orientadorExistente.setCelular(orientadorAtualizado.getCelular());
+        }
+        if (orientadorAtualizado.getNumeroRg() != null) {
+            orientadorExistente.setNumeroRg(orientadorAtualizado.getNumeroRg());
+        }
+        if (orientadorAtualizado.getOrgaoExpedidor() != null) {
+            orientadorExistente.setOrgaoExpedidor(orientadorAtualizado.getOrgaoExpedidor());
+        }
+        if (orientadorAtualizado.getDataEmissao() != null) {
+            orientadorExistente.setDataEmissao(orientadorAtualizado.getDataEmissao());
+        }
+        if (orientadorAtualizado.getCpf() != null) {
+            orientadorExistente.setCpf(orientadorAtualizado.getCpf());
+        }
+        if (orientadorAtualizado.getEstadoCivil() != null) {
+            orientadorExistente.setEstadoCivil(orientadorAtualizado.getEstadoCivil());
+        }
+        if (orientadorAtualizado.getNacionalidade() != null) {
+            orientadorExistente.setNacionalidade(orientadorAtualizado.getNacionalidade());
+        }
+        if (orientadorAtualizado.getNaturalidade() != null) {
+            orientadorExistente.setNaturalidade(orientadorAtualizado.getNaturalidade());
+        }
+        if (orientadorAtualizado.getEspecialidade() != null) {
+            orientadorExistente.setEspecialidade(orientadorAtualizado.getEspecialidade());
+        }
+        return colecaoOrientador.save(orientadorAtualizado);
+    }
+    @Override
+    public void removerOrientadorId(long id) throws UsuarioNaoExisteException {
+        Orientador o = consultarOrientadorPorId(id);
         colecaoOrientador.delete(o);
 
     }
+
+
+
     //Consultar
     @Override
     public Orientador consultarOrientadorPorEmail(String email) throws UsuarioNaoExisteException {
@@ -42,6 +89,10 @@ public class CadastroOrientador implements InterfaceCadastroOrientador {
             throw new UsuarioNaoExisteException(email);
         }
         return o;
+    }
+    @Override
+    public Orientador consultarOrientadorPorId(long id) throws UsuarioNaoExisteException {
+        return colecaoOrientador.findById(id).orElseThrow(() -> new UsuarioNaoExisteException(id));
     }
     //Existencia
     @Override

@@ -1,7 +1,7 @@
 package br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro;
 
+import br.edu.ufape.poo.gerenciamentoestudantes.dados.InterfaceColecaoEstudante;
 import br.edu.ufape.poo.gerenciamentoestudantes.dados.InterfaceColecaoFuncao;
-import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Enums.TipoFuncao;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Estudante;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Funcao;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro.exception.FuncaoDuplicadaException;
@@ -16,24 +16,57 @@ public class CadastroFuncao implements InterfaceCadastroFuncao {
 
     @Autowired
     private InterfaceColecaoFuncao colecaoFuncao;
+    @Autowired
+    private InterfaceColecaoEstudante colecaoEstudante;
 
     @Override
-    public Funcao cadastrarFuncao(Estudante estudante, Funcao funcao) throws FuncaoDuplicadaException {
-        verificarFuncaoDuplicada(estudante, funcao); // Verifica se é duplicada e lança exceção se for
+    public Funcao cadastrarFuncao(Funcao funcao) throws FuncaoDuplicadaException {
+        Estudante estudante = funcao.getEstudante();
 
+        // Verifique se o estudante já existe no banco de dados
+        Estudante estudanteExistente = colecaoEstudante.findByMatricula(estudante.getMatricula());
+
+        if (estudanteExistente == null) {
+            // O estudante não existe, então salve-o
+            estudante = colecaoEstudante.save(estudante);
+        } else {
+            // O estudante já existe, use o existente
+            estudante = estudanteExistente;
+        }
+
+        // Associe o estudante à função
         estudante.addFuncao(funcao);
+        funcao.setEstudante(estudante);
+
+        // Verifique se a função é duplicada
+        verificarFuncaoDuplicada(estudante, funcao);
+
+        // Salve a função
         return colecaoFuncao.save(funcao);
     }
 
+
+
+
     @Override
-    public void atualizarFuncao(Funcao funcao) {
+    public Funcao atualizarFuncao(Funcao funcao) {
         Funcao funcaoExistente = buscarFuncaoPorId(funcao.getId());
 
-        funcaoExistente.setTipoFuncao(funcao.getTipoFuncao());
-        funcaoExistente.setDataInicio(funcao.getDataInicio());
-        funcaoExistente.setDataFim(funcao.getDataFim());
+        if (funcao.getEstudante() != null) {
+            funcaoExistente.setEstudante(funcao.getEstudante());
+        }
+        if (funcao.getDataFim() != null) {
+            funcaoExistente.setDataFim(funcao.getDataFim());
+        }
+        if (funcao.getDataInicio() != null) {
+            funcaoExistente.setDataInicio(funcao.getDataInicio());
+        }
+        if (funcao.getTipoFuncao() != null) {
+            funcaoExistente.setTipoFuncao(funcao.getTipoFuncao());
+        }
 
-        colecaoFuncao.save(funcaoExistente);
+        return colecaoFuncao.save(funcaoExistente);
+
     }
 
     @Override
@@ -51,6 +84,10 @@ public class CadastroFuncao implements InterfaceCadastroFuncao {
     @Override
     public List<Funcao> buscarFuncoesPorEstudante(Estudante estudante) {
         return colecaoFuncao.findByEstudante(estudante);
+    }
+    @Override
+    public List<Funcao> listarFuncoes() {
+        return colecaoFuncao.findAll();
     }
 
     @Override

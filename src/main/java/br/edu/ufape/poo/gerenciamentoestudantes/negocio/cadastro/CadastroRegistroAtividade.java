@@ -3,11 +3,9 @@ package br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro;
 import br.edu.ufape.poo.gerenciamentoestudantes.dados.InterfaceColecaoEstudante;
 import br.edu.ufape.poo.gerenciamentoestudantes.dados.InterfaceColecaoHorario;
 import br.edu.ufape.poo.gerenciamentoestudantes.dados.InterfaceColecaoRegistro;
-import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Documento;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Estudante;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Horario;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.RegistroAtividade;
-import br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro.exception.HorarioDuplicadoException;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro.exception.RegistroAtividadeDuplicadoException;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.cadastro.exception.RegistroAtividadeNaoEncontradoException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CadastroAtividade implements InterfaceCadastrarRegistroAtividades {
+public class CadastroRegistroAtividade implements InterfaceCadastrarRegistroAtividades {
     @Autowired
     private InterfaceColecaoRegistro colecaoRegistroAtividade;
     @Autowired

@@ -69,8 +69,20 @@ public class Fachada {
         return cadastroOrientador.salvarOrientador(entity);
     }
 
+    public Orientador atualizarOrientador(Orientador orientadorAtualizado) throws UsuarioNaoExisteException {
+        return cadastroOrientador.atualizarOrientador(orientadorAtualizado);
+    }
+
     public Orientador consultarOrientadorPorEmail(String email) throws UsuarioNaoExisteException {
         return cadastroOrientador.consultarOrientadorPorEmail(email);
+    }
+
+    public void removerOrientadorId(long id) throws UsuarioNaoExisteException {
+        cadastroOrientador.removerOrientadorId(id);
+    }
+
+    public Orientador consultarOrientadorPorId(long id) throws UsuarioNaoExisteException {
+        return cadastroOrientador.consultarOrientadorPorId(id);
     }
 
     public boolean verificarExistenciaOrientadorId(Long id) {
@@ -185,12 +197,13 @@ public class Fachada {
     //Funca
 
 
-    public Funcao cadastrarFuncao(Estudante estudante, Funcao funcao) throws FuncaoDuplicadaException {
-        return cadastroFuncao.cadastrarFuncao(estudante, funcao);
+    public Funcao cadastrarFuncao(Funcao funcao) throws FuncaoDuplicadaException {
+        return cadastroFuncao.cadastrarFuncao(funcao);
     }
 
-    public void atualizarFuncao(Funcao funcao) {
-        cadastroFuncao.atualizarFuncao(funcao);
+    public Funcao atualizarFuncao(Funcao funcao) {
+
+        return cadastroFuncao.atualizarFuncao(funcao);
     }
 
     public void deletarFuncao(long id) {
@@ -208,6 +221,9 @@ public class Fachada {
     public void verificarFuncaoDuplicada(Estudante estudante, Funcao funcao) {
         cadastroFuncao.verificarFuncaoDuplicada(estudante, funcao);
     }
+    public List<Funcao> listarFuncoes(){
+        return cadastroFuncao.listarFuncoes();
+    }
     //Bolsa
 
     public Bolsa cadastrarBolsa(Bolsa bolsa) throws BolsaDuplicadaException {
@@ -223,6 +239,7 @@ public class Fachada {
     }
 
     public Bolsa atualizarBolsa(Bolsa bolsa) {
+
         return cadastroBolsa.atualizarBolsa(bolsa);
     }
 

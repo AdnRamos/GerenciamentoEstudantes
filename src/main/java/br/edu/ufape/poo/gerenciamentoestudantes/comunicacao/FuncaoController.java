@@ -14,25 +14,30 @@ import java.util.List;
 public class FuncaoController {
     @Autowired
     public Fachada fachada;
+    @GetMapping("/funcao")
+    public List<Funcao> listarFuncoes(){
+        return fachada.listarFuncoes();
+    }
 
     @GetMapping("/funcao/{id}")
     public Funcao consultarFuncaoID(@PathVariable long id){
         return fachada.buscarFuncaoPorId(id);
     }
-    @GetMapping("/funcao/{estudante}")
+    @GetMapping("/funcao/estudante/{estudante}")
     public List<Funcao> consultarFuncoesEstudante(@RequestBody Estudante estudante){
         return fachada.buscarFuncoesPorEstudante(estudante);
     }
     @PostMapping("/funcao")
-    public Funcao salvarFuncao(@RequestBody Funcao funcao, @RequestBody Estudante estudante) throws FuncaoDuplicadaException {
-        return fachada.cadastrarFuncao(estudante, funcao);
+    public Funcao salvarFuncao(@RequestBody Funcao funcao) throws FuncaoDuplicadaException {
+        return fachada.cadastrarFuncao(funcao);
     }
-    @PatchMapping("/funcao")
-    public String atualizarFuncao(@RequestBody Funcao funcao){
-        fachada.atualizarFuncao(funcao);
-        return "Funcao atualziada com sucesso!";
+    @PatchMapping("/funcao/{id}")
+    public Funcao atualizarFuncao(@PathVariable long id, @RequestBody Funcao funcao){
+        funcao.setId(id);
+        return fachada.atualizarFuncao(funcao);
+
     }
-    @DeleteMapping("/funcao")
+    @DeleteMapping("/funcao/{id}")
     public String deletarFuncao(@PathVariable long id){
         fachada.deletarFuncao(id);
         return "Funcao deletada com sucesso!";

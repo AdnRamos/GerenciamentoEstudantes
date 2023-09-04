@@ -1,6 +1,8 @@
 package br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica;
 
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Enums.TipoFuncao;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 @Entity
@@ -9,7 +11,8 @@ public class Funcao {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonBackReference
     private Estudante estudante;
     private TipoFuncao tipoFuncao;
     private String dataInicio;

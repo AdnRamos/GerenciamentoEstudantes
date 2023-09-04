@@ -26,6 +26,7 @@ public class Estudante extends Usuario {
     private List<Vinculo> vinculos = new ArrayList<>();
 
     @OneToMany(mappedBy = "estudante", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference
     private List<Funcao> funcoes = new ArrayList<>();
 
     @OneToMany(mappedBy = "estudante", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

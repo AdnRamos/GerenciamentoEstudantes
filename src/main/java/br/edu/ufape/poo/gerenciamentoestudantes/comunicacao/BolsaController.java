@@ -25,11 +25,12 @@ public class BolsaController {
     public Bolsa salvarBolsa(@RequestBody Bolsa bolsa){
         return fachada.cadastrarBolsa(bolsa);
     }
-    @PatchMapping("/bolsa")
-    public Bolsa atualizarBolsa(@RequestBody Bolsa bolsa){
+    @PatchMapping("/bolsa/{id}")
+    public Bolsa atualizarBolsa(@PathVariable long id, @RequestBody Bolsa bolsa){
+        bolsa.setId(id);
         return fachada.atualizarBolsa(bolsa);
     }
-    @DeleteMapping("/bolsa")
+    @DeleteMapping("/bolsa/{id}")
     public String deletarBolsa(@PathVariable long id){
         fachada.deletarBolsa(id);
         return "Bolsa deletada com sucesso!";

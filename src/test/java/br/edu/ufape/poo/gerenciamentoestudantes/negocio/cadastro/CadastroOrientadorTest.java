@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
@@ -52,21 +54,21 @@ public class CadastroOrientadorTest {
     }
     @Test
     public void RemoverOrientadorPorEmailTeste() throws UsuarioNaoExisteException {
-        String emailParaRemover = "email@pararemover.com";
+        long idParaRemover = 1L;
         Orientador orientador = new Orientador();
-        when(colecaoOrientador.findByEmail(emailParaRemover)).thenReturn(orientador);
+        when(colecaoOrientador.findById(idParaRemover)).thenReturn(Optional.of(orientador));
 
-        cadastroOrientador.removerUsuarioEmail(emailParaRemover);
+        cadastroOrientador.removerOrientadorId(idParaRemover);
 
         verify(colecaoOrientador, times(1)).delete(orientador);
     }
     @Test
     public void RemoverOrientadorPorEmailInexistenteTeste() {
-        String emailInexistente = "email@inexistente.com";
-        when(colecaoOrientador.findByEmail(emailInexistente)).thenReturn(null);
+        long idInexistente = 1L;
+        when(colecaoOrientador.findById(idInexistente)).thenReturn(null);
 
         assertThrows(UsuarioNaoExisteException.class, () -> {
-            cadastroOrientador.removerUsuarioEmail(emailInexistente);
+            cadastroOrientador.removerOrientadorId(idInexistente);
         });
 
         verify(colecaoOrientador, never()).delete(any());

@@ -41,17 +41,17 @@ public class OrientadorController {
 
 
     @PatchMapping("/orientador/{id}")
-    public Orientador atualizarDados(@PathVariable long id, @RequestBody Orientador orientador) throws UsuarioDuplicadoException {
+    public Orientador atualizarDados(@PathVariable long id, @RequestBody Orientador orientador) throws UsuarioNaoExisteException, UsuarioDuplicadoException {
         orientador.setId(id);
-        return fachada.salvarOrientador(orientador);
+        return fachada.atualizarOrientador(orientador);
     }
 
-    @DeleteMapping("/orientador/{email}")
-    public String apagarOrientador(@PathVariable String email)
+    @DeleteMapping("/orientador/{id}")
+    public String apagarOrientador(@PathVariable long id)
             throws UsuarioNaoExisteException {
 
-        fachada.removerUsuarioEmail(email);
-        return "ok";
+        fachada.removerOrientadorId(id);
+        return "Orientador removido com sucesso.";
     }
 
 }
