@@ -18,5 +18,5 @@ public interface InterfaceCadastroHorario {
 
     void excluirHorario(Long id) throws HorarioNaoEncontradoException;
 
-    boolean temConflito(Horario horarioNovo, Estudante estudante);
+    //boolean temConflito(Horario horarioNovo, Estudante estudante);
 }

@@ -51,18 +51,22 @@ public class CadastroHorario implements InterfaceCadastroHorario {
 
         colecaoHorario.deleteById(id);
     }
-    @Override
-    public boolean temConflito(Horario horarioNovo, Estudante estudante) {
-        List<Horario> horariosEstudante = estudante.getHorarios();
 
-        for (Horario horarioExistente : horariosEstudante) {
-            if (horariosConflitantes(horarioNovo, horarioExistente)) {
-                return true; // Conflito encontrado
-            }
-        }
+    /**
+     @Override
+     public boolean temConflito(Horario horarioNovo, Estudante estudante) {
+     List<Horario> horariosEstudante = estudante.getHorarios();
 
-        return false; // Sem conflitos
-    }
+     for (Horario horarioExistente : horariosEstudante) {
+     if (horariosConflitantes(horarioNovo, horarioExistente)) {
+     return true; // Conflito encontrado
+     }
+     }
+
+     return false; // Sem conflitos
+     }
+     */
+
 
     private boolean horariosConflitantes(Horario horario1, Horario horario2) {
         // Converta as horas de início e término dos horários em minutos para facilitar a comparação

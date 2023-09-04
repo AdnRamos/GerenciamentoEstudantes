@@ -11,10 +11,6 @@ public class Horario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "estudante")
-    private Estudante estudante;
-
     @OneToOne(fetch = FetchType.LAZY)
     private RegistroAtividade registro;
     private ModalidadeAtividade modalidade;
@@ -39,14 +35,6 @@ public class Horario {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public Estudante getEstudante() {
-        return estudante;
-    }
-
-    public void setEstudante(Estudante estudante) {
-        this.estudante = estudante;
     }
 
     public RegistroAtividade getRegistro() {

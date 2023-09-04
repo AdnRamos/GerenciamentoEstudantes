@@ -19,13 +19,10 @@ public class Estudante extends Usuario {
     private String matricula;
 
     @OneToMany(mappedBy = "estudante", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Horario> horarios = new ArrayList<>();
-
-    @OneToMany(mappedBy = "estudante", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonManagedReference
     private List<RegistroAtividade> registros = new ArrayList<>();
 
     @OneToMany(mappedBy = "estudante", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference
     private List<Vinculo> vinculos = new ArrayList<>();
 
     @OneToMany(mappedBy = "estudante", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -74,19 +71,6 @@ public class Estudante extends Usuario {
 
     public void setMatricula(String matricula) {
         this.matricula = matricula;
-    }
-
-    public List<Horario> getHorarios() {
-        return horarios;
-    }
-
-    public void setHorarios(List<Horario> horarios) {
-        this.horarios = horarios;
-
-
-    }
-    public void addHorario(Horario horario){
-        this.horarios.add(horario);
     }
 
     public List<RegistroAtividade> getRegistros() {

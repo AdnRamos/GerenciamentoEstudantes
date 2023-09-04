@@ -1,6 +1,7 @@
 package br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica;
 
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Enums.TipoVinculo;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -9,7 +10,8 @@ public class Vinculo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonBackReference
     private Estudante estudante;
     private boolean ativo;
     private TipoVinculo tipoVinculo;
@@ -81,4 +83,5 @@ public class Vinculo {
     public void setDataFim(String dataFim) {
         this.dataFim = dataFim;
     }
+
 }

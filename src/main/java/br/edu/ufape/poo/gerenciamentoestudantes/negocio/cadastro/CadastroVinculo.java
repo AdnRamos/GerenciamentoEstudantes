@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CadastroVinculo implements InterfaceCadastroVinculo {
@@ -20,39 +19,80 @@ public class CadastroVinculo implements InterfaceCadastroVinculo {
     private InterfaceColecaoEstudante colecaoEstudante;
 
     @Override
-    public Vinculo cadastrarVinculo(Estudante estudante, Vinculo vinculo) throws VinculoDuplicadoException {
-        if (verificarExistenciaVinculo(estudante,vinculo.getTipoVinculo(),vinculo.getDataInicio(), vinculo.getDataFim())) {
-            throw new VinculoDuplicadoException("O estudante"+ estudante.getNome()+"já está com esse vinculo cadastrado");
-        }
-        System.out.println("Buscando estudante no banco de dados com ID: " + estudante.getId());
-        Estudante estudanteExistente = colecaoEstudante.findById(estudante.getId())
-                .orElseThrow(() -> new EstudanteNaoEncontradoException());
-        System.out.println("Estudante encontrado: " + estudanteExistente.getNome());
-        estudante.addVinculo(vinculo);
-        colecaoEstudante.save(estudanteExistente);
+    public Vinculo cadastrarVinculo(Vinculo vinculo) throws VinculoDuplicadoException {
+        Estudante estudante = vinculo.getEstudante();
 
+        if (estudante != null) {
+            // Verifique se o estudante já está persistido no banco de dados
+            if (estudante.getId() == 0) {
+                // Se o estudante não tiver um ID, salve-o primeiro
+                colecaoEstudante.save(estudante);
+            }
+
+            // Agora o estudante tem um ID válido
+            Estudante estudanteExistente = colecaoEstudante.findById(estudante.getId())
+                    .orElseThrow(EstudanteNaoEncontradoException::new);
+
+            //estudanteExistente.addVinculo(vinculo);
+            colecaoEstudante.save(estudanteExistente);
+        }
+
+        // Salve o estudante atualizado e o novo vínculo em uma única transação
         return colecaoVinculo.save(vinculo);
     }
 
+
+
     @Override
-    public void atualizarVinculo(Vinculo vinculo) {
-        Optional<Vinculo> vinculoExistente = colecaoVinculo.findById(vinculo.getId());
+    public Vinculo atualizarVinculo(Vinculo vinculo) {
+        // Verifique se o vínculo existe
+        Vinculo vinculoExistente = consultarPorId(vinculo.getId());
 
-        if (!vinculoExistente.isPresent()) {
-            throw new VinculoNaoEncontradoException(vinculo.getId());
+        // Atualize os campos necessários
+        if (vinculo.getTipoVinculo() != null) {
+            vinculoExistente.setTipoVinculo(vinculo.getTipoVinculo());
+        }
+        if (vinculo.getDataFim() != null) {
+            vinculoExistente.setDataFim(vinculo.getDataFim());
+        }
+        if (vinculo.getDataInicio() != null) {
+            vinculoExistente.setDataInicio(vinculo.getDataInicio());
+        }
+        if (vinculo.getQtdHorasSemanais() != null) {
+            vinculoExistente.setQtdHorasSemanais(vinculo.getQtdHorasSemanais());
+        }
+        if (vinculo.getEstudante() != null) {
+            vinculoExistente.setEstudante(vinculo.getEstudante());
+        }
+        if(vinculo.isAtivo()){
+            vinculoExistente.setAtivo(vinculo.isAtivo());
         }
 
-        Vinculo vinculoAtualizado = vinculoExistente.get();
-        vinculoAtualizado.setAtivo(vinculo.isAtivo());
-        vinculoAtualizado.setDataFim(vinculo.getDataFim());
 
-        try {
-            colecaoVinculo.save(vinculoAtualizado);
-        } catch (Exception e) {
-            throw new NaoSalvouException("Falha ao atualizar o vinculo", e);
-        }
+        // Salve as alterações
+
+        return colecaoVinculo.save(vinculoExistente);
     }
 
+
+
+
+    @Override
+    public List<Vinculo> listarVinculos() {
+        return colecaoVinculo.findAll();
+    }
+    @Override
+    public List<Vinculo> listarVinculosPorEstudante(Estudante estudante) {
+        return colecaoVinculo.findByEstudante(estudante);
+    }
+    @Override
+    public Vinculo consultarPorId(Long id) {
+        return colecaoVinculo.findById(id).orElse(null);
+    }
+    @Override
+    public void deletarPorId(Long aLong) {
+        colecaoVinculo.deleteById(aLong);
+    }
 
     @Override
     public boolean verificarExistenciaVinculo(Estudante estudante, TipoVinculo tipoVinculo, String dataInicio, String dataFim) {

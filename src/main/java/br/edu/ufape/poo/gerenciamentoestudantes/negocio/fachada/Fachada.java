@@ -47,11 +47,15 @@ public class Fachada {
         return cadastroEstudante.listarEstudantes();
     }
     public Estudante salvarEstudante(Estudante entity) throws UsuarioDuplicadoException {
+        if(entity.getEndereco() != null){
+            Endereco endereco = entity.getEndereco();
+            cadastroEndereco.save(endereco);
+        }
         return cadastroEstudante.salvarEstudante(entity);
     }
     public Estudante atualizarEstudante(Estudante estudanteAtualizado){
         return cadastroEstudante.atualizarEstudante(estudanteAtualizado);
-    };
+    }
     public void removerUsuarioEmail(String email) throws UsuarioNaoExisteException {
         cadastroEstudante.removerUsuarioEmail(email);
     }
@@ -97,19 +101,39 @@ public class Fachada {
         cadastroHorario.excluirHorario(id);
     }
 
-    public boolean temConflito(Horario horarioNovo, Estudante estudante) {
-        return cadastroHorario.temConflito(horarioNovo, estudante);
-    }
+
+
+
+    /**
+     public boolean temConflito(Horario horarioNovo, Estudante estudante) {
+     return cadastroHorario.temConflito(horarioNovo, estudante);
+     }
+     */
     //Vinculo
     //preciso criar os metodos de listar
 
-    public Vinculo cadastrarVinculo(Estudante estudante, Vinculo vinculo) {
-        return cadastroVinculo.cadastrarVinculo(estudante, vinculo);
+    public List<Vinculo> listarVinculosPorEstudante(Estudante estudante) {
+        return cadastroVinculo.listarVinculosPorEstudante(estudante);
+    }
+
+    public Vinculo consultarVinculoPorId(Long id) {
+        return cadastroVinculo.consultarPorId(id);
+    }
+
+    public List<Vinculo> listarVinculos() {
+        return cadastroVinculo.listarVinculos();
+    }
+
+    public Vinculo cadastrarVinculo(Vinculo vinculo) throws UsuarioDuplicadoException {
+        return cadastroVinculo.cadastrarVinculo(vinculo);
     }
 
     public Vinculo atualizarVinculo(Vinculo vinculo) {
         cadastroVinculo.atualizarVinculo(vinculo);
         return vinculo;
+    }
+    public void deletarVinculoPorId(Long aLong) {
+        cadastroVinculo.deletarPorId(aLong);
     }
 
     public boolean verificarExistenciaVinculo(Estudante estudante, TipoVinculo tipoVinculo, String dataInicio, String dataFim) {

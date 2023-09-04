@@ -41,7 +41,7 @@ public class CadastroVinculoTest {
         Estudante estudante = cadastroEstudante.consultarEstudantePorEmail(email);
 
         // Salvar vínculo no cadastro
-        Vinculo vinculoSalvo = cadastroVinculo.cadastrarVinculo(estudante, vinculo);
+        Vinculo vinculoSalvo = cadastroVinculo.cadastrarVinculo(vinculo);
 
         // Verifica se o vínculo foi salvo corretamente
         assertNotNull(vinculoSalvo);

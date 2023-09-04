@@ -4,10 +4,16 @@ import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Enums.TipoVinculo
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Estudante;
 import br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica.Vinculo;
 
-public interface InterfaceCadastroVinculo {
-    Vinculo cadastrarVinculo(Estudante estudante, Vinculo vinculo);
+import java.util.List;
 
-    void atualizarVinculo(Vinculo vinculo);
+public interface InterfaceCadastroVinculo {
+    Vinculo cadastrarVinculo(Vinculo vinculo);
+
+    Vinculo atualizarVinculo(Vinculo vinculo);
 
     boolean verificarExistenciaVinculo(Estudante estudante, TipoVinculo tipoVinculo, String dataInicio, String dataFim);
+     List<Vinculo> listarVinculosPorEstudante(Estudante estudante);
+    Vinculo consultarPorId(Long aLong);
+    public List<Vinculo> listarVinculos();
+    public void deletarPorId(Long aLong);
 }
