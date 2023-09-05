@@ -19,7 +19,7 @@ public class CadastroParticipacaoTest {
     @Autowired
     private CadastroProjeto cadastroProjeto;
     @Test
-    public void SalvarParticipacaoTeste() throws ParticipacaoDuplicadaException, ParticipacaoDataInvalidaException, ParticipacaoAssociacaoException, ProjetoDuplicadoException, UsuarioDuplicadoException {
+    public void SalvarParticipacaoTeste() throws ParticipacaoDuplicadaException, ParticipacaoDataInvalidaException, ParticipacaoAssociacaoException, ProjetoDuplicadoException, UsuarioDuplicadoException, ProjetoNaoExisteException {
         Estudante estudante = new Estudante(false, "galeroso", "@asuausdfn", "3452345235");
         Projeto projeto = new Projeto("Projeto asdfasdfa", "Descrição do Projeto", "2023-08-25",                "Java, Spring", "Aplicativo Web", "Sistema de Gerenciamento");
 
@@ -36,7 +36,7 @@ public class CadastroParticipacaoTest {
     }
 
     @Test
-    public void SalvarParticipacaoDuplicadaTeste() throws ParticipacaoDuplicadaException, UsuarioDuplicadoException, ProjetoDuplicadoException {
+    public void SalvarParticipacaoDuplicadaTeste() throws ParticipacaoDuplicadaException, UsuarioDuplicadoException, ProjetoDuplicadoException, ProjetoNaoExisteException {
         // Cenário
         Estudante estudante = new Estudante(false, "galeroso", "@3242342", "3452345235");
         Projeto projeto = new Projeto("Projeto ewerwerw", "Descrição do Projeto", "2023-08-25",                "Java, Spring", "Aplicativo Web", "Sistema de Gerenciamento");

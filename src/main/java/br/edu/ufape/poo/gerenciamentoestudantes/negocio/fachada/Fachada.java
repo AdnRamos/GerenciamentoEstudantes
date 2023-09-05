@@ -27,6 +27,8 @@ public class Fachada {
     @Autowired
     private InterfaceCadastroFuncao cadastroFuncao;
     @Autowired
+    private InterfaceCadastroProjeto cadastroProjeto;
+    @Autowired
     private InterfaceCadastroBolsa cadastroBolsa;
     @Autowired
     private InterfaceCadastroInscricao cadastroInscricao;
@@ -258,6 +260,10 @@ public class Fachada {
         return cadastroInscricao.listarInscricoesPorEstudante(estudante);
     }
 
+    public List<Inscricao> listarInscricoes() {
+        return cadastroInscricao.listarInscricoes();
+    }
+
     public Inscricao buscarInscricaoPorId(long id) throws InscricaoNaoEncontradaException {
         return cadastroInscricao.buscarInscricaoPorId(id);
     }
@@ -303,5 +309,26 @@ public class Fachada {
     public void apagarEnderecoId(long id) {
         cadastroEndereco.deleteById(id);
     }
+    //Projeto
 
+
+    public List<Projeto> listarProjetos() {
+        return cadastroProjeto.listarProjetos();
+    }
+
+    public Projeto salvarProjeto(Projeto projeto) throws ProjetoDuplicadoException, ProjetoNaoExisteException {
+        return cadastroProjeto.salvarProjeto(projeto);
+    }
+
+    public void removerProjetoPorId(long id) throws ProjetoNaoExisteException {
+        cadastroProjeto.removerProjetoPorId(id);
+    }
+
+    public Projeto consultarProjetoPorId(long id) throws ProjetoNaoExisteException {
+        return cadastroProjeto.consultarProjetoPorId(id);
+    }
+
+    public boolean verificarExistenciaProjetoId(Long id) {
+        return cadastroProjeto.verificarExistenciaProjetoId(id);
+    }
 }

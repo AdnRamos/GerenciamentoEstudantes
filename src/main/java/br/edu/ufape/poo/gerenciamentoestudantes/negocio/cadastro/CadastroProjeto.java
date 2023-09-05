@@ -8,39 +8,41 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
-public class CadastroProjeto {
+public class CadastroProjeto implements InterfaceCadastroProjeto {
 
     @Autowired
     private InterfaceColecaoProjeto cadastroProjeto;
 
+    @Override
     public List<Projeto> listarProjetos() {
         return cadastroProjeto.findAll();
     }
 
+    @Override
     public Projeto salvarProjeto(Projeto projeto) throws ProjetoDuplicadoException {
-        try {
-            consultarProjetoPorNome(projeto.getNomeProjeto());
+        // Verifica se já existe um projeto com o mesmo nome
+        if (cadastroProjeto.existsByNomeProjeto(projeto.getNomeProjeto())) {
             throw new ProjetoDuplicadoException(projeto.getNomeProjeto());
-        } catch (ProjetoNaoExisteException ignored) {
-            return cadastroProjeto.save(projeto);
         }
+
+        // Se não houver duplicação, salva o projeto
+        return cadastroProjeto.save(projeto);
     }
 
-    public void removerProjetoPorNome(String nomeProjeto) throws ProjetoNaoExisteException {
-        Projeto projeto = consultarProjetoPorNome(nomeProjeto);
+
+    public void removerProjetoPorId(long id) throws ProjetoNaoExisteException {
+        Projeto projeto = consultarProjetoPorId(id);
         cadastroProjeto.delete(projeto);
     }
 
-    public Projeto consultarProjetoPorNome(String nomeProjeto) throws ProjetoNaoExisteException {
-        Projeto projeto = cadastroProjeto.findByNomeProjeto(nomeProjeto);
-        if (projeto == null) {
-            throw new ProjetoNaoExisteException(nomeProjeto);
-        }
-        return projeto;
+    public Projeto consultarProjetoPorId(long id) throws ProjetoNaoExisteException {
+        return cadastroProjeto.findById(id).orElseThrow(() -> new ProjetoNaoExisteException(id));
     }
 
+    @Override
     public boolean verificarExistenciaProjetoId(Long id) {
         return cadastroProjeto.existsById(id);
     }

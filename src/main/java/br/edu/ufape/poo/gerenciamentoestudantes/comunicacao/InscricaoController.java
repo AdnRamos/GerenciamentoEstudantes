@@ -15,8 +15,8 @@ public class InscricaoController {
     public Fachada fachada;
 
     @GetMapping("/inscricao")
-    public List<Inscricao> listarInscricoesPorEstudante(@RequestBody Estudante estudante){
-        return fachada.listarInscricoesPorEstudante(estudante);
+    public List<Inscricao> listarInscricoes(){
+        return fachada.listarInscricoes();
     }
     @GetMapping("/inscricao/{id}")
     public Inscricao consultarInscricaoID(@PathVariable long id){
@@ -26,7 +26,7 @@ public class InscricaoController {
     public Inscricao salvarInscricao (@RequestBody Inscricao inscricao){
         return fachada.cadastrarInscricao(inscricao);
     }
-    @DeleteMapping("/inscricao")
+    @DeleteMapping("/inscricao/{id}")
     public String deletarInscricao(@PathVariable long id){
         fachada.removerInscricaoPorId(id);
         return "Inscricao cancelada com sucesso!";

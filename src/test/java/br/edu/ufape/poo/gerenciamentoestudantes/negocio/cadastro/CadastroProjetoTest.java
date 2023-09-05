@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -23,12 +25,12 @@ public class CadastroProjetoTest {
         Projeto projetoSalvo = cadastroProjeto.salvarProjeto(projeto);
         assertNotNull(projetoSalvo.getId());
 
-        Projeto consultarProjetoSalvo = cadastroProjeto.consultarProjetoPorNome("Projeto Teste2");
+        Projeto consultarProjetoSalvo = cadastroProjeto.consultarProjetoPorId(projetoSalvo.getId());
         assertEquals(projetoSalvo.getId(), consultarProjetoSalvo.getId());
     }
 
     @Test
-    public void SalvarProjetoDuplicadoTeste() throws ProjetoDuplicadoException {
+    public void SalvarProjetoDuplicadoTeste() throws ProjetoDuplicadoException, ProjetoNaoExisteException {
         Projeto projeto = new Projeto("Projeto Duplicado", "Descrição do Projeto", "2023-08-25",
                 "Java, Spring", "Aplicativo Web", "Sistema de Gerenciamento");
         cadastroProjeto.salvarProjeto(projeto);
@@ -42,14 +44,11 @@ public class CadastroProjetoTest {
         Projeto removerTeste = new Projeto("Projeto remover", "Descrição do Projeto", "2023-08-25",
                 "Java, Spring", "Aplicativo Web", "Sistema de Gerenciamento");
         cadastroProjeto.salvarProjeto(removerTeste);
-        Projeto projeto = cadastroProjeto.consultarProjetoPorNome("Projeto remover");
-        cadastroProjeto.removerProjetoPorNome(projeto.getNomeProjeto());
+        Projeto projeto = cadastroProjeto.consultarProjetoPorId(removerTeste.getId());
+        cadastroProjeto.removerProjetoPorId(projeto.getId());
 
-        assertThrows(ProjetoNaoExisteException.class, () -> cadastroProjeto.consultarProjetoPorNome("Projeto Teste"));
+        assertThrows(ProjetoNaoExisteException.class, () -> cadastroProjeto.consultarProjetoPorId(projeto.getId()));
     }
 
-    @Test
-    public void ConsultarProjetoPorNomeTeste() {
-        assertThrows(ProjetoNaoExisteException.class, () -> cadastroProjeto.consultarProjetoPorNome("Projeto Inexistente"));
-    }
+
 }

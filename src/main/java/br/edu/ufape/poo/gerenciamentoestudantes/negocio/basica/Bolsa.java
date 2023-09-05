@@ -1,5 +1,8 @@
 package br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -9,12 +12,13 @@ import java.util.List;
 public class Bolsa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private long Id;
     private String descricao;
     private String edital;
     private String inicioInscricao;
     private String fimInscricao;
     @OneToMany(mappedBy = "bolsa", cascade = CascadeType.ALL)
+    @JsonBackReference
     private List<Inscricao> inscricoes;
 
     public Bolsa() {
@@ -28,7 +32,7 @@ public class Bolsa {
     }
 
     public long getId() {
-        return Id;
+        return this.Id;
     }
 
     public void setId(long id) {
