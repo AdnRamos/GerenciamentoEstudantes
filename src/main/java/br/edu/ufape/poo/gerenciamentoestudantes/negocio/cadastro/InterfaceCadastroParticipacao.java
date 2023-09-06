@@ -12,6 +12,7 @@ public interface InterfaceCadastroParticipacao {
     Participacao cadastrarParticipacao(Participacao participacao) throws ParticipacaoDuplicadaException;
 
     void removerParticipacao(Participacao participacao) throws ParticipacaoNaoEncontradaException;
+    List<Participacao> listarParticipacoes();
 
     Participacao consultarParticipacaoPorId(long id) throws ParticipacaoNaoEncontradaException;
 

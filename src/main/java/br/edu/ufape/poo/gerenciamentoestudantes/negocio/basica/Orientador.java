@@ -1,5 +1,6 @@
 package br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.List;

@@ -1,5 +1,6 @@
 package br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 @Entity
@@ -9,8 +10,10 @@ public class Participacao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @ManyToOne
+    @JsonIgnoreProperties({"participacoes", "inscricoes", "orientador", "vinculos", "registros", "login", "senha", "gestao","celular", "numeroRg", "orgaoExpedidor", "dataEmissao", "cpf", "estadoCivil", "nacionalidade", "naturalidade", "endereco", "curso", "funcao"})
     private Estudante estudante;
     @ManyToOne
+    @JsonIgnoreProperties({"descricao", "dataCriacao", "dataCertificacao", "linguagensDeDesenvolvimento", "campoAplicacao", "tipoSistema", "participacoes", "scrumMaster", "orientador"})
     private Projeto projeto;
     private String dataInicio;
     private String dataFim;

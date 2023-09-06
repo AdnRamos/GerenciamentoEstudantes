@@ -1,5 +1,6 @@
 package br.edu.ufape.poo.gerenciamentoestudantes.negocio.basica;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -17,24 +18,26 @@ public class Projeto {
     private String dataCricao;
     private String dataCertificacao;
     private String linguagensDeDesenvolvimento;
-    private String compoDeAplicacao;
+    private String campoDeAplicacao;
     private String tipoSistema;
     @OneToMany(mappedBy = "projeto", cascade = CascadeType.ALL)
     private List<Participacao> participacoes;
     @ManyToOne
+    @JsonIgnoreProperties({"projetos", "orientandos","login", "senha", "gestao", "email","celular", "numeroRg", "orgaoExpedidor", "dataEmissao", "cpf", "estadoCivil", "nacionalidade", "naturalidade", "endereco","curso", "especialidade"})
     private Orientador orientador;
     @OneToOne
+    @JsonIgnoreProperties({"participacoes", "inscricoes", "orientador", "vinculos", "registros", "login", "senha", "gestao", "email","celular", "numeroRg", "orgaoExpedidor", "dataEmissao", "cpf", "estadoCivil", "nacionalidade", "naturalidade", "endereco", "curso", "funcao","matricula"})
     private Estudante scrumMaster;
 
     public Projeto() {
     }
 
-    public Projeto(String nomeProjeto, String descricao, String dataCricao, String linguagensDeDesenvolvimento, String compoDeAplicacao, String tipoSistema) {
+    public Projeto(String nomeProjeto, String descricao, String dataCricao, String linguagensDeDesenvolvimento, String campoDeAplicacao, String tipoSistema) {
         this.nomeProjeto = nomeProjeto;
         this.descricao = descricao;
         this.dataCricao = dataCricao;
         this.linguagensDeDesenvolvimento = linguagensDeDesenvolvimento;
-        this.compoDeAplicacao = compoDeAplicacao;
+        this.campoDeAplicacao = campoDeAplicacao;
         this.tipoSistema = tipoSistema;
     }
 
@@ -86,12 +89,12 @@ public class Projeto {
         this.linguagensDeDesenvolvimento = linguagensDeDesenvolvimento;
     }
 
-    public String getCompoDeAplicacao() {
-        return compoDeAplicacao;
+    public String getCampoDeAplicacao() {
+        return campoDeAplicacao;
     }
 
-    public void setCompoDeAplicacao(String compoDeAplicacao) {
-        this.compoDeAplicacao = compoDeAplicacao;
+    public void setCampoDeAplicacao(String compoDeAplicacao) {
+        this.campoDeAplicacao = compoDeAplicacao;
     }
 
     public String getTipoSistema() {

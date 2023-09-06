@@ -54,7 +54,7 @@ public class CadastroParticipacaoTest {
     }
 
     @Test
-    public void ConsultarParticipacaoPorIdTeste() throws ParticipacaoNaoEncontradaException, ParticipacaoDuplicadaException {
+    public void ConsultarParticipacaoPorIdTeste() throws ParticipacaoNaoEncontradaException, ParticipacaoDuplicadaException, ProjetoNaoExisteException, ProjetoDuplicadoException {
         // Cenário
         Participacao participacao = new Participacao("2023-08-25");
         cadastroParticipacao.cadastrarParticipacao(participacao);

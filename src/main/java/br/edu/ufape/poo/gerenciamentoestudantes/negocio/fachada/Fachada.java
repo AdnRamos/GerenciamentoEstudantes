@@ -273,11 +273,15 @@ public class Fachada {
     }
     //participacao
 
-    public Participacao cadastrarParticipacao(Participacao participacao) throws ParticipacaoDuplicadaException {
+    public Participacao cadastrarParticipacao(Participacao participacao) throws ParticipacaoDuplicadaException, ParticipacaoDataInvalidaException, ProjetoNaoExisteException, ProjetoDuplicadoException {
         return cadastroParticipacao.cadastrarParticipacao(participacao);
     }
     public void removerParticipacao(Participacao participacao) throws ParticipacaoNaoEncontradaException {
         cadastroParticipacao.removerParticipacao(participacao);
+    }
+
+    public List<Participacao> listarParticipacoes() {
+        return cadastroParticipacao.listarParticipacoes();
     }
 
     public Participacao consultarParticipacaoPorId(long id) throws ParticipacaoNaoEncontradaException {

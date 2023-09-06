@@ -12,10 +12,10 @@ public class Inscricao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @ManyToOne(cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("inscricoes")
+    @JsonIgnoreProperties({"inscricoes", "inicioInscricao", "fimInscricao", "edital"})
     private Bolsa bolsa;
     @ManyToOne(cascade = CascadeType.ALL)
-    @JsonIgnoreProperties("inscricoes")
+    @JsonIgnoreProperties({"participacoes", "inscricoes", "funcoes", "orientador", "vinculos", "registros", "login", "senha", "gestao", "email","celular", "numeroRg", "orgaoExpedidor", "dataEmissao", "cpf", "estadoCivil", "nacionalidade", "naturalidade", "endereco", "curso", "funcao"})
     private Estudante estudante;
 
     public Inscricao() {

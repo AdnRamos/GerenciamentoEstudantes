@@ -15,4 +15,5 @@ public class UsuarioNaoExisteException extends Exception{
     public String getEmail() {
         return email;
     }
+    public long getId(){return id;}
 }

@@ -12,7 +12,7 @@ public class Funcao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @ManyToOne(cascade = CascadeType.ALL)
-    @JsonBackReference
+    @JsonIgnoreProperties({"participacoes", "inscricoes", "funcoes", "orientador", "vinculos", "registros", "login", "senha", "gestao", "email","celular", "numeroRg", "orgaoExpedidor", "dataEmissao", "cpf", "estadoCivil", "nacionalidade", "naturalidade", "endereco", "curso", "funcao"})
     private Estudante estudante;
     private TipoFuncao tipoFuncao;
     private String dataInicio;

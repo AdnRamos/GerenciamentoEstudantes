@@ -36,6 +36,10 @@ public class CadastroParticipacao implements InterfaceCadastroParticipacao {
         colecaoParticipacao.delete(participacao);
     }
 
+    public List<Participacao> listarParticipacoes() {
+        return colecaoParticipacao.findAll();
+    }
+
     @Override
     public Participacao consultarParticipacaoPorId(long id) throws ParticipacaoNaoEncontradaException {
         return colecaoParticipacao.findById(id)

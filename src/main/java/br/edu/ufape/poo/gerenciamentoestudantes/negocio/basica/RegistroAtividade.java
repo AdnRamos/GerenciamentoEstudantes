@@ -16,7 +16,7 @@ public class RegistroAtividade {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "estudante_id")
-    @JsonIgnoreProperties("registros")
+    @JsonIgnoreProperties({"participacoes", "inscricoes", "funcoes", "orientador", "vinculos", "registros", "login", "senha", "gestao", "email","celular", "numeroRg", "orgaoExpedidor", "dataEmissao", "cpf", "estadoCivil", "nacionalidade", "naturalidade", "endereco", "curso", "funcao"})
     private Estudante estudante;
 
     @OneToOne(fetch = FetchType.LAZY)
