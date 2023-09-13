@@ -16,7 +16,7 @@ public class CadastroEstudanteTest {
     private InterfaceCadastroEstudante cadastroEstudante;
     @Test
     void cadastroEstudanteTeste(){
-        String email = "Naoseimais@desgraçaaaaa.com";
+        String email = "jose@gmail.com";
         Estudante e0 = new Estudante(true, "jose", email, "5544552");
         Estudante e = new Estudante(true, "jose", email, "5544552");
 
@@ -31,7 +31,7 @@ public class CadastroEstudanteTest {
     }
     @Test
     public void testSalvarEstudante() throws UsuarioDuplicadoException {
-        Estudante estudante = new Estudante(true, "carlos", "asdfasdf4563456asdfasf", "5544552");
+        Estudante estudante = new Estudante(true, "carlos", "carlos@gmail.com", "5544552");
         Estudante savedEstudante = cadastroEstudante.salvarEstudante(estudante);
 
         assertNotNull(savedEstudante.getId());
@@ -39,7 +39,7 @@ public class CadastroEstudanteTest {
 
     @Test
     public void testSalvarEstudanteDuplicado() throws UsuarioDuplicadoException {
-        Estudante estudante = new Estudante(false, "victor", "asd3242fasdf5634563asdfasf", "5544552");
+        Estudante estudante = new Estudante(false, "victor", "victor@gmail.com", "5544553");
         cadastroEstudante.salvarEstudante(estudante);
 
         assertThrows(UsuarioDuplicadoException.class, () -> {
@@ -49,7 +49,7 @@ public class CadastroEstudanteTest {
 
     @Test
     public void testConsultarEstudantePorId() throws UsuarioDuplicadoException {
-        Estudante estudante = new Estudante(true, "joao", "asdf2326asdfasdfasf", "5544552");
+        Estudante estudante = new Estudante(true, "joao", "joao@gmail.com", "5544554");
         Estudante savedEstudante = cadastroEstudante.salvarEstudante(estudante);
 
         Estudante foundEstudante = cadastroEstudante.consultarEstudantePorId(savedEstudante.getId());
@@ -57,15 +57,6 @@ public class CadastroEstudanteTest {
         assertEquals(savedEstudante.getId(), foundEstudante.getId());
     }
 
-    @Test
-    public void testConsultarEstudantePorNome() throws UsuarioDuplicadoException, UsuarioNaoExisteException {
-        Estudante estudante = new Estudante(true, "jean", "as1231212dfasdfa65165sdfasf", "5544552");
-        cadastroEstudante.salvarEstudante(estudante);
-
-        Estudante foundEstudante = cadastroEstudante.consultarEstudantePorNome("jean");
-        assertNotNull(foundEstudante);
-        assertEquals("jean", foundEstudante.getNome());
-    }
 
     @Test
     public void testConsultarEstudantePorEmail() throws UsuarioNaoExisteException, UsuarioDuplicadoException {

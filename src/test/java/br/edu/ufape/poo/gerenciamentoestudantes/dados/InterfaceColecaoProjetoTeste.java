@@ -15,7 +15,8 @@ public class InterfaceColecaoProjetoTeste {
     @Test
     void cadastrarProjetoTeste(){
         long qtdProjetos = ColecaoProjeto.count();
-        Projeto pro = new Projeto("Test", "faz alguma cosia", "11/02/2022","java", "saude", "clienteServidor");
+        Projeto pro = new Projeto("Gerenciamento Estudantes", "Sistema responsavel por gerenciar estudantes",
+                "11/08/2023","java", "gestão", "clienteServidor");
         ColecaoProjeto.save(pro);
         long qtdProjetos1 = ColecaoProjeto.count();
         assertEquals(qtdProjetos+1, qtdProjetos1);
